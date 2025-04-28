@@ -1,0 +1,410 @@
+{
+    "experiment": {
+        "materials": {
+            "compositions": [
+                {
+                    "name": "Astra 1-20",
+		    "nominal_composition" : "Ni-5.9W-6.4Ta-6Re.0Mo-8.5Cr-8.6Co-5.9Al",
+		     "processing_conditions": {
+		            "casting": {
+		                "furnace": "lab-scale Bridgman vacuum induction melting furnace",
+		                "shape": "cylindrical rod",
+		                "height": {
+                                    "value": 180,
+                                    "unit": "mm"
+                                },
+                                "diameter": {
+                                    "value": 12,
+                                    "unit": "mm"
+                                },
+		                "withdrawal_rate": {
+		                    "value": 9,
+		                    "unit": "mm/min"
+		                },
+		                "primary_dendrite_arm_spacing": {
+		                    "value": 180,
+		                    "unit": "um"
+		                }
+		            },
+		            "heat_treatment": {
+                            "homogenization": {
+                                "temperature": {
+                                    "value": 1340,
+                                    "unit": "\u00b0C"
+                                },
+                                "duration": {
+                                    "value": 16,
+                                    "unit": "hours"
+                                },
+                                "Heating rate": {
+                                    "value": 4,
+                                    "unit": "K/min"
+                                },
+                                "Cooling":"aircooling"
+                            },
+                            "aging_1": {
+                               "temperature": {
+                                    "value": 1140,
+                                    "unit": "\u00b0C"
+                                },
+                                "duration": {
+                                    "value": 2,
+                                    "unit": "hours"
+                                },
+                                "Heating rate": {
+                                    "value": 4,
+                                    "unit": "K/min"
+                                },
+                                "Cooling":"aircooling"
+                            },
+                            "aging_2": {
+                               "temperature": {
+                                    "value":870,
+                                    "unit": "\u00b0C"
+                                },
+                                "duration": {
+                                    "value": 24,
+                                    "unit": "hours"
+                                },
+                                "Heating rate": {
+                                    "value": 4,
+                                    "unit": "K/min"
+                                },
+                                "Cooling":"aircooling"
+                            }
+                        },
+                         "sample_preparation": {
+                            "cutting": {
+                                "height": {
+                                    "value": 10,
+                                    "unit": "mm"
+                                },
+                                "diameter": {
+                                    "value": 12,
+                                    "unit": "mm"
+                                }
+                            }
+                        },
+		            "annealing": {
+		                "temperature": {
+		                    "value": 950,
+		                    "unit": "\u00b0C"
+		                },
+		                "time_intervals": [
+		                    500,
+		                    1000,
+		                    1500,
+		                    2000
+		                ],
+		                "unit": "h"
+		            }
+		        },
+		        "characterization": {
+		            "SEM-FIB": {
+		                "instrument": "Helios NanoLab 600i",
+		                "detector": "concentric backscattered (CBS)",
+		                "mode": "in-lens",
+		                "accelerating_voltage": {
+		                    "value": 5,
+		                    "unit": "keV"
+		                },
+		                "beam_current": {
+		                    "value": 0.69,
+		                    "unit": "nA"
+		                }
+		            },
+		            "3D_inspection": {
+		                "method": "automated FIB sectioning",
+		                "detector": "backscattered detector (BSE)",
+		                "mode": "UHR",
+		                "slice_thickness": {
+		                    "value": 20,
+		                    "unit": "nm"
+		                },
+		                "total_slices": 400,
+		                "area_per_slice": {
+		                    "value": 100,
+		                    "unit": "um^2"
+		                },
+		                "total_volume": {
+		                    "value": 800,
+		                    "unit": "um^3"
+		                }
+		            },
+		            "image_processing": {
+		                "method": "binarization",
+		                "software": "FEI SAS AvizoFire",
+		                "algorithm": "grayscale thresholding"
+		            },
+		            "TEM": {
+		                "sample_preparation": {
+		                    "method": "grinding and polishing",
+		                    "final_thickness": {
+		                        "value": 80,
+		                        "unit": "um"
+		                    },
+		                    "dimple_grinding": {
+		                        "value": "few um"
+		                    },
+		                    "ion_thinning": {
+		                        "ion": "Ar+",
+		                        "temperature": {
+		                            "value": -20,
+		                            "unit": "\u00b0C"
+		                        },
+		                        "ion_energy": {
+		                            "value": 700,
+		                            "unit": "eV"
+		                        }
+		                    }
+		                },
+		                "instrument": "Philips CM30",
+		                "accelerating_voltage": {
+		                    "value": 300,
+		                    "unit": "kV"
+		                },
+		                "HRTEM_instrument": "FEI Titan^3 80-300",
+		                "HRTEM_voltage": {
+		                    "value": 200,
+		                    "unit": "kV"
+		                }
+		            },
+		            "APT": {
+		                "preparation": {
+		                    "method": "dual-beam FIB",
+		                    "instrument": "FEI Helios Nanolab 600",
+		                    "final_shaping": {
+		                        "beam": "Ga",
+		                        "energy": {
+		                            "value": 5,
+		                            "unit": "keV"
+		                        }
+		                    }
+		                },
+		                "instrument": "LEAPm\u2122 3000X HR",
+		                "mode": "pulsed laser",
+		                "wavelength": {
+		                    "value": 532,
+		                    "unit": "nm"
+		                },
+		                "pulse_length": {
+		                    "value": 12,
+		                    "unit": "ps"
+		                },
+		                "energy": {
+		                    "value": 0.4,
+		                    "unit": "nJ"
+		                },
+		                "frequency": {
+		                    "value": 100,
+		                    "unit": "kHz"
+		                },
+		                "base_temperature": {
+		                    "value": 40,
+		                    "unit": "K"
+		                },
+		                "software": "Cameca IVAS\u2122 3.6.6"
+		            }
+		        }
+		     },
+                    {
+                 "name": "Astra 1-21",
+		     "processing_conditions": {
+		            "casting": {
+		                "furnace": "lab-scale Bridgman vacuum induction melting furnace",
+		                "shape": "cylindrical rod",
+		                "height": {
+                                    "value": 180,
+                                    "unit": "mm"
+                                },
+                                "diameter": {
+                                    "value": 12,
+                                    "unit": "mm"
+                                },
+		                "withdrawal_rate": {
+		                    "value": 9,
+		                    "unit": "mm/min"
+		                },
+		                "primary_dendrite_arm_spacing": {
+		                    "value": 180,
+		                    "unit": "um"
+		                }
+		            },
+		            "heat_treatment": {
+                            "homogenisation": {
+                                "temperature": {
+                                    "value": 1340,
+                                    "unit": "\u00b0C"
+                                },
+                                "duration": {
+                                    "value": 16,
+                                    "unit": "hours"
+                                },
+                                "Heating rate": {
+                                    "value": 4,
+                                    "unit": "K/min"
+                                },
+                                "Cooling":"aircooling"
+                            },
+                            "aging_1": {
+                               "temperature": {
+                                    "value": 1140,
+                                    "unit": "\u00b0C"
+                                },
+                                "duration": {
+                                    "value": 2,
+                                    "unit": "hours"
+                                },
+                                "Heating rate": {
+                                    "value": 4,
+                                    "unit": "K/min"
+                                },
+                                "Cooling":"aircooling"
+                            },
+                            "aging_2": {
+                               "temperature": {
+                                    "value":870,
+                                    "unit": "\u00b0C"
+                                },
+                                "duration": {
+                                    "value": 24,
+                                    "unit": "hours"
+                                },
+                                "Heating rate": {
+                                    "value": 4,
+                                    "unit": "K/min"
+                                },
+                                "Cooling":"aircooling"
+                            }
+                        },
+                         "sample_preparation": {
+                            "cutting": {
+                                "height": {
+                                    "value": 10,
+                                    "unit": "mm"
+                                },
+                                "diameter": {
+                                    "value": 12,
+                                    "unit": "mm"
+                                }
+                            }
+                        },
+		            "annealing": {
+		                "temperature": {
+		                    "value": 950,
+		                    "unit": "\u00b0C"
+		                },
+		                "time_intervals": [
+		                    500,
+		                    1000,
+		                    1500,
+		                    2000
+		                ],
+		                "unit": "h"
+		            }
+		        },
+                "characterization": {
+                    "SEM-FIB": {
+                        "instrument": "Helios NanoLab 600i",
+                        "detector": "concentric backscattered (CBS)",
+                        "mode": "in-lens",
+                        "accelerating_voltage": {
+                            "value": 5,
+                            "unit": "keV"
+                        },
+                        "beam_current": {
+                            "value": 0.69,
+                            "unit": "nA"
+                        }
+                    },
+                    "3D_inspection": {
+                        "method": "automated FIB sectioning",
+                        "detector": "backscattered detector (BSE)",
+                        "mode": "UHR",
+                        "slice_thickness": {
+                            "value": 20,
+                            "unit": "nm"
+                        },
+                        "total_slices": 400,
+                        "area_per_slice": {
+                            "value": 100,
+                            "unit": "um^2"
+                        },
+                        "total_volume": {
+                            "value": 800,
+                            "unit": "um^3"
+                        }
+                    },
+                    "image_processing": {
+                        "method": "binarization",
+                        "software": "FEI SAS AvizoFire",
+                        "algorithm": "grayscale thresholding"
+                    },
+                    "TEM": {
+                        "sample_preparation": {
+                            "method": "lift out technique",
+                            "instrument": "FEI Helios NanoLab 600i",
+                            "final_milling": {
+                                "voltage": {
+                                    "value": 2,
+                                    "unit": "kV"
+                                },
+                                "thickness": {
+                                    "value": 50,
+                                    "unit": "nm"
+                                }
+                            }
+                        },
+                        "instrument": "Philips CM30",
+                        "accelerating_voltage": {
+                            "value": 300,
+                            "unit": "kV"
+                        },
+                        "HRTEM_instrument": "FEI Titan^3 80-300",
+                        "HRTEM_voltage": {
+                            "value": 200,
+                            "unit": "kV"
+                        }
+                    },
+                    "APT": {
+                        "preparation": {
+                            "method": "dual-beam FIB",
+                            "instrument": "FEI Helios Nanolab 600",
+                            "final_shaping": {
+                                "beam": "Ga",
+                                "energy": {
+                                    "value": 5,
+                                    "unit": "keV"
+                                }
+                            }
+                        },
+                        "instrument": "LEAPm\u2122 3000X HR",
+                        "mode": "pulsed laser",
+                        "wavelength": {
+                            "value": 532,
+                            "unit": "nm"
+                        },
+                        "pulse_length": {
+                            "value": 12,
+                            "unit": "ps"
+                        },
+                        "energy": {
+                            "value": 0.4,
+                            "unit": "nJ"
+                        },
+                        "frequency": {
+                            "value": 100,
+                            "unit": "kHz"
+                        },
+                        "base_temperature": {
+                            "value": 40,
+                            "unit": "K"
+                        },
+                        "software": "Cameca IVAS\u2122 3.6.6"
+                    }
+                }
+            }
+         ]
+       }
+   }
+}

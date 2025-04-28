@@ -1,0 +1,168 @@
+{
+    "experiment": {
+        "materials": {
+            "compositions": [
+                {
+                    "name": null,
+                    "nominal_composition": null,
+                    "processing_conditions": {
+                        "casting": {
+                            "method": null,
+                            "location": null
+                        },
+                        "heat_treatment": {
+                            "homogenization": {
+                                "temperature": {
+                                    "value": null,
+                                    "unit": null
+                                },
+                                "duration": {
+                                    "value": null,
+                                    "unit": null
+                                }
+                            },
+                            "aging": {
+                                "temperature": {
+                                    "value": null,
+                                    "unit": null
+                                },
+                                "duration": {
+                                    "value": null,
+                                    "unit": null
+                                }
+                            }
+                        },
+                        "sample_preparation": {
+                            "cutting": {
+                                "shape": null,
+                                "height": {
+                                    "value": null,
+                                    "unit": null
+                                },
+                                "diameter": {
+                                    "value": null,
+                                    "unit": null
+                                }
+                            },
+                            "polishing": {
+                                "surface_finish": {
+                                    "value": null,
+                                    "unit": null
+                                }
+                            }
+                        }
+                    },
+                    "characterization": {
+                        "chemical_composition": {
+                            "method": null,
+                            "results": null
+                        }
+                    }
+                }
+            ]
+        },
+        "isothermal_oxidation": {
+            "conditions": {
+                "device": null,
+                "gas_flow": {
+                    "value": null,
+                    "unit": null
+                },
+                "atmosphere": null,
+                "target_temperature": {
+                    "value": null,
+                    "unit": null
+                },
+                "gas_composition": null,
+                "duration": {
+                    "value": null,
+                    "unit": null
+                }
+            },
+            "sample_preparation": {
+                "protection": null
+            }
+        },
+        "electron_microscopy": {
+            "sample_preparation": {
+                "cutting": {
+                    "location": null,
+                    "method": null
+                },
+                "microscopy": {
+                    "device": null,
+                    "software": null
+                }
+            },
+            "TEM_sample_preparation": {
+                "extraction": {
+                    "method": null,
+                    "direction": null
+                },
+                "protection": {
+                    "method": null
+                },
+                "grinding_and_polishing": {
+                    "method": null,
+                    "wedge_angle": {
+                        "value": null,
+                        "unit": null
+                    },
+                    "thickness": {
+                        "value": null,
+                        "unit": null
+                    }
+                },
+                "final_thinning": {
+                    "method": null,
+                    "voltage": {
+                        "value": null,
+                        "unit": null
+                    },
+                    "angle": {
+                        "value": null,
+                        "unit": null
+                    },
+                    "duration": {
+                        "value": null,
+                        "unit": null
+                    }
+                }
+            },
+            "ADF-STEM": {
+                "device": null,
+                "voltage": {
+                    "value": null,
+                    "unit": null
+                },
+                "camera_length": {
+                    "value": null,
+                    "unit": null
+                }
+            },
+            "STEM-EDX_mappings": {
+                "device": null,
+                "voltage": {
+                    "value": null,
+                    "unit": null
+                },
+                "detectors": {
+                    "type": null,
+                    "quantity": null
+                }
+            },
+            "EDX_results": {
+                "elements": [
+                    null,
+                    null,
+                    null,
+                    null
+                ],
+                "colour_coding": {
+                    "low": null,
+                    "high": null
+                }
+            }
+        }
+    }
+}

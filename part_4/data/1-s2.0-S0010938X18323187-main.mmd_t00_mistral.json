@@ -1,0 +1,293 @@
+{
+    "experiment": {
+        "materials": {
+            "compositions": [
+                {
+                    "name": "NC100sx",
+                    "nominal_composition": "Co–9Al–8W–8Cr",
+                    "processing_conditions": {
+		         "casting": {
+		                    "method": "Bridgman process",
+		                    "location": "Institute of Metals Science and Technology (WTM, University of Erlangen-Nurnberg (FAU), Germany)"
+		         },
+                        "heat_treatment": {
+                            "furnace":"vacuum tube furnace",
+                            "homogenization": {
+                                "temperature": {
+                                    "value": 1250,
+                                    "unit": "\u00b0C"
+                                },
+                                "duration": {
+                                    "value": 12,
+                                    "unit": "hours"
+                                }
+                            },
+                            "aging": {
+                                "temperature": {
+                                    "value": 900,
+                                    "unit": "\u00b0C"
+                                },
+                                "duration": {
+                                    "value": 100,
+                                    "unit": "hours"
+                                }
+                            }
+                        },
+                        "sample_preparation": {
+                            "cutting": {
+                                "shape": "discs",
+                                "height": {
+                                    "value": 0.8,
+                                    "unit": "mm"
+                                }
+                            }
+                        }
+                    },
+                    "characterization": {
+                        "ICP-OES": "Actual compositions after heat treatment were determined by ICP-OES."
+                    }
+                },
+                {
+                    "name": "NC75sx",
+                    "nominal_composition": "Co–18.75Ni–9Al–8W–8Cr",
+                    "processing_conditions": {
+		         "casting": {
+		                    "method": "Bridgman process",
+		                    "location": "Institute of Metals Science and Technology (WTM, University of Erlangen-Nurnberg (FAU), Germany)"
+		         },
+                        "heat_treatment": {
+                            "furnace":"vacuum tube furnace",
+                            "homogenization": {
+                                "temperature": {
+                                    "value": 1250,
+                                    "unit": "\u00b0C"
+                                },
+                                "duration": {
+                                    "value": 12,
+                                    "unit": "hours"
+                                }
+                            },
+                            "aging": {
+                                "temperature": {
+                                    "value": 900,
+                                    "unit": "\u00b0C"
+                                },
+                                "duration": {
+                                    "value": 100,
+                                    "unit": "hours"
+                                }
+                            }
+                        },
+                        "sample_preparation": {
+                            "cutting": {
+                                "shape": "discs",
+                                "height": {
+                                    "value": 0.8,
+                                    "unit": "mm"
+                                }
+                            }
+                        }
+                    },
+                    "characterization": {
+                        "ICP-OES": "Actual compositions after heat treatment were determined by ICP-OES."
+                    }
+                },{
+                    "name": "NC50sx",
+                    "nominal_composition": "Co–37.5Ni–9Al–8W–8Cr",
+                    "processing_conditions": {
+		         "casting": {
+		                    "method": "Bridgman process",
+		                    "location": "Institute of Metals Science and Technology (WTM, University of Erlangen-Nurnberg (FAU), Germany)"
+		         },
+                        "heat_treatment": {
+                            "furnace":"vacuum tube furnace",
+                            "homogenization": {
+                                "temperature": {
+                                    "value": 1250,
+                                    "unit": "\u00b0C"
+                                },
+                                "duration": {
+                                    "value": 12,
+                                    "unit": "hours"
+                                }
+                            },
+                            "aging": {
+                                "temperature": {
+                                    "value": 900,
+                                    "unit": "\u00b0C"
+                                },
+                                "duration": {
+                                    "value": 100,
+                                    "unit": "hours"
+                                }
+                            }
+                        },
+                        "sample_preparation": {
+                            "cutting": {
+                                "shape": "discs",
+                                "height": {
+                                    "value": 0.8,
+                                    "unit": "mm"
+                                }
+                            }
+                        }
+                    },
+                    "characterization": {
+                        "ICP-OES": "Actual compositions after heat treatment were determined by ICP-OES."
+                    }
+                },{
+                    "name": "NC25sx",
+                    "nominal_composition": "Co–56.25Ni–9Al–8W–8Cr",
+                    "processing_conditions": {
+		         "casting": {
+		                    "method": "Bridgman process",
+		                    "location": "Institute of Metals Science and Technology (WTM, University of Erlangen-Nurnberg (FAU), Germany)"
+		         },
+                        "heat_treatment": {
+                            "furnace":"vacuum tube furnace",
+                            "homogenization": {
+                                "temperature": {
+                                    "value": 1250,
+                                    "unit": "\u00b0C"
+                                },
+                                "duration": {
+                                    "value": 12,
+                                    "unit": "hours"
+                                }
+                            },
+                            "aging": {
+                                "temperature": {
+                                    "value": 900,
+                                    "unit": "\u00b0C"
+                                },
+                                "duration": {
+                                    "value": 100,
+                                    "unit": "hours"
+                                }
+                            }
+                        },
+                        "sample_preparation": {
+                            "cutting": {
+                                "shape": "discs",
+                                "height": {
+                                    "value": 0.8,
+                                    "unit": "mm"
+                                }
+                            }
+                        }
+                    },
+                    "characterization": {
+                        "ICP-OES": "Actual compositions after heat treatment were determined by ICP-OES."
+                    }
+                },{
+                    "name": "NC00sx",
+                    "nominal_composition": "Ni–9Al–8W–8Cr",
+                    "processing_conditions": {
+		         "casting": {
+		                    "method": "Bridgman process",
+		                    "location": "Institute of Metals Science and Technology (WTM, University of Erlangen-Nurnberg (FAU), Germany)"
+		         },
+                        "heat_treatment": {
+                            "furnace":"vacuum tube furnace",
+                            "homogenization": {
+                                "temperature": {
+                                    "value": 1250,
+                                    "unit": "\u00b0C"
+                                },
+                                "duration": {
+                                    "value": 12,
+                                    "unit": "hours"
+                                }
+                            },
+                            "aging": {
+                                "temperature": {
+                                    "value": 900,
+                                    "unit": "\u00b0C"
+                                },
+                                "duration": {
+                                    "value": 100,
+                                    "unit": "hours"
+                                }
+                            }
+                        },
+                        "sample_preparation": {
+                            "cutting": {
+                                "shape": "discs",
+                                "height": {
+                                    "value": 0.8,
+                                    "unit": "mm"
+                                }
+                            }
+                        }
+                    },
+                    "characterization": {
+                        "ICP-OES": "Actual compositions after heat treatment were determined by ICP-OES."
+                    }
+                }
+            ]
+        },
+        "thermogravimetric_analysis": {
+            "description": "Thermogravimetry was performed using a Setaram Evolution 1650 analyser under constant gas flow of 20 cm\u00b3/min.",
+            "sample_preparation": {
+                "surface_finish": {
+                    "value": 1,
+                    "unit": "\u00b5m"
+                }
+            },
+            "atmosphere": {
+                "initial": "Ar",
+                "target": {
+                    "composition": "80% N2 + 20% O2",
+                    "description": "dry synthetic air"
+                }
+            },
+            "detection": {
+                "start": "with the inlet of the oxidising gas"
+            }
+        },
+        "halogen_treatment_and_thermal_exposure": {
+            "description": "The F treatment was performed by using beamline ion-implantation (BLI2).",
+            "implantation_parameters": {
+                "ion_energy": {
+                    "value": 38,
+                    "unit": "keV"
+                },
+                "projected_range": {
+                    "value": "35-40",
+                    "unit": "nm"
+                },
+                "fluence": {
+                    "NC75xx": {
+                        "value": 6.4e+16,
+                        "unit": "F/cm\u00b2"
+                    },
+                    "others": {
+                        "value": 1e+17,
+                        "unit": "F/cm\u00b2"
+                    }
+                }
+            },
+            "thermal_exposure": {
+                "temperature": {
+                    "value": 900,
+                    "unit": "\u00b0C"
+                },
+                "duration": {
+                    "value": 100,
+                    "unit": "hours"
+                }
+            }
+        },
+        "analysis_of_cross_sections": {
+            "description": "For subsequent investigation of cross-sections, oxidised samples were protected by an electrochemically deposited Ni layer to minimise spallation.",
+            "preparation_methods": [
+                "ion milling system (Hitachi IM4000)",
+                "mechanical grinding and polishing"
+            ],
+            "characterization": {
+                "FE-SEM": "Hitachi S-4800",
+                "EPMA": "Jeol JXA-8100"
+            }
+        }
+    }
+}

@@ -1,0 +1,168 @@
+{
+    "experiment": {
+        "materials": {
+            "compositions": [
+                {
+                    "name": "single-crystalline ternary Co-base superalloy",
+                    "nominal_composition":"Co-9Al-9W",
+                    "processing_conditions": {
+                        "casting": {
+                            "method": "Bridgman investment casting",
+                            "location": "Institute of Metals Science and Technology (WTM, University of Erlangen-Nurnberg (FAU), Germany)"
+                        },
+                        "heat_treatment": {
+                            "homogenization": {
+                                "temperature": {
+                                    "value": 1300,
+                                    "unit": "\u00b0C"
+                                },
+                                "duration": {
+                                    "value": 12,
+                                    "unit": "hours"
+                                }
+                            },
+                            "aging": {
+                                "temperature": {
+                                    "value": 900,
+                                    "unit": "\u00b0C"
+                                },
+                                "duration": {
+                                    "value": 200,
+                                    "unit": "hours"
+                                }
+                            }
+                        },
+                        "sample_preparation": {
+                            "cutting": {
+                                "shape": "discs",
+                                "height": {
+                                    "value": 0.8,
+                                    "unit": "mm"
+                                },
+                                "diameter": {
+                                    "value": 11,
+                                    "unit": "mm"
+                                }
+                            },
+                            "polishing": {
+                                "surface_finish": {
+                                    "value": 1,
+                                    "unit": "um"
+                                }
+                            }
+                        }
+                    },
+                    "characterization": {
+                        "chemical_composition": {
+                            "method": "ICP-OES",
+                            "results": "Table 1"
+                        }
+                    }
+                }
+            ]
+        },
+        "isothermal_oxidation": {
+            "conditions": {
+                "device": "Setaram Evolution 1650 thermogravimetric analyser",
+                "gas_flow": {
+                    "value": 20,
+                    "unit": "cm\u00b3 min\u207b\u00b9"
+                },
+                "atmosphere": "Ar",
+                "target_temperature": {
+                    "value": 900,
+                    "unit": "\u00b0C"
+                },
+                "gas_composition": "dry synthetic air (80%N\u2082 20%O\u2082)",
+                "duration": {
+                    "value": 100,
+                    "unit": "hours"
+                }
+            },
+            "sample_preparation": {
+                "protection": "electrochemically deposited Ni-layer"
+            }
+        },
+        "electron_microscopy": {
+            "sample_preparation": {
+                "cutting": {
+                    "location": "middle",
+                    "method": "ion milling system (Hitachi IM4000)"
+                },
+                "microscopy": {
+                    "device": "scanning electron microscope (Hitachi FE-SEM S-4800)",
+                    "software": "ImageJ"
+                }
+            },
+            "TEM_sample_preparation": {
+                "extraction": {
+                    "method": "wire saw",
+                    "direction": "\u03b6100\u00b0C"
+                },
+                "protection": {
+                    "method": "glued superalloy base material"
+                },
+                "grinding_and_polishing": {
+                    "method": "wedge grinding and polishing",
+                    "wedge_angle": {
+                        "value": "5-7",
+                        "unit": "degrees"
+                    },
+                    "thickness": {
+                        "value": 20,
+                        "unit": "um"
+                    }
+                },
+                "final_thinning": {
+                    "method": "ion milling",
+                    "voltage": {
+                        "value": 1,
+                        "unit": "kV"
+                    },
+                    "angle": {
+                        "value": 5,
+                        "unit": "degrees"
+                    },
+                    "duration": {
+                        "value": 30,
+                        "unit": "minutes"
+                    }
+                }
+            },
+            "ADF-STEM": {
+                "device": "double-aberration-corrected Titan Themis\u00b3 300",
+                "voltage": {
+                    "value": 300,
+                    "unit": "kV"
+                },
+                "camera_length": {
+                    "value": 115,
+                    "unit": "mm"
+                }
+            },
+            "STEM-EDX_mappings": {
+                "device": "Super-X detector incorporating the Bruker ChemiSTEM\u2122 system",
+                "voltage": {
+                    "value": 300,
+                    "unit": "kV"
+                },
+                "detectors": {
+                    "type": "silicon drift detectors (SDD)",
+                    "quantity": 4
+                }
+            },
+            "EDX_results": {
+                "elements": [
+                    "Co",
+                    "Al",
+                    "W",
+                    "O"
+                ],
+                "colour_coding": {
+                    "low": "dark blue",
+                    "high": "red"
+                }
+            }
+        }
+    }
+}
