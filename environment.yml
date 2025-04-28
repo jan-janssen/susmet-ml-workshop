@@ -5,3 +5,4 @@ dependencies:
 - gensim =4.3.3
 - nltk =3.9.1
 - matplotlib-base =3.10.1
+- scikit-learn =1.6.1
