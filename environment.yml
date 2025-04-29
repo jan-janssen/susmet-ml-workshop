@@ -12,3 +12,5 @@ dependencies:
 - scipy =1.15.2
 - opencv =4.11.0
 - py-opencv =4.11.0
+- python-ternary =1.0.8
+- seaborn =0.13.2
