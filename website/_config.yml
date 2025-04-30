@@ -1,0 +1,13 @@
+title: SusMet Machine Learning Workshop
+author: Jan Janssen
+
+execute:
+  execute_notebooks           : off
+
+repository:
+    url                       : https://github.com/jan-janssen/susmet-ml-workshop
+    path_to_book              : ""
+
+launch_buttons:
+  notebook_interface          : jupyterlab
+  binderhub_url               : https://mybinder.org
