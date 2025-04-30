@@ -1,0 +1,1716 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Analyzing Datasets by Machine Learning &#8212; SusMet Machine Learning Workshop</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '1_joerg_neugebauer/DataSetAnalysis';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../3_jan_janssen/experiment_llama_31_v2.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">SusMet Machine Learning Workshop</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../3_jan_janssen/experiment_llama_31_v2.html">
+                    Adaptive sampling for high resistance materials
+                </a>
+            </li>
+        </ul>
+        
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://mybinder.org/v2/gh/jan-janssen/susmet-ml-workshop/master?urlpath=lab/tree/1_joerg_neugebauer/DataSetAnalysis.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Binder"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Binder logo" src="../_static/images/logo_binder.svg">
+  </span>
+<span class="btn__text-container">Binder</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/1_joerg_neugebauer/DataSetAnalysis.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Analyzing Datasets by Machine Learning</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#find-a-suitable-dataset">Find a suitable dataset</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comprehensive-databases-for-elastic-constants">Comprehensive Databases for Elastic Constants</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary-table">Summary Table</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-access">How to Access</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-following-chat-is-created-using-deepseek-r1-distill-llama-70b">The following chat is created using DeepSeek R1 Distill Llama 70B</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#explanation">Explanation:</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pretty-print-the-json-data">1. <strong>Pretty Print the JSON Data</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#use-the-pprint-module">2. <strong>Use the <code class="docutils literal notranslate"><span class="pre">pprint</span></code> Module</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#convert-json-to-a-pandas-dataframe">3. <strong>Convert JSON to a Pandas DataFrame</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#recursive-visualization-of-nested-data">4. <strong>Recursive Visualization of Nested Data</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interactive-visualization-with-plotly">5. <strong>Interactive Visualization with Plotly</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#use-a-json-viewer-in-jupyter-notebook">6. <strong>Use a JSON Viewer in Jupyter Notebook</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#understanding-the-k-g-ratio">1. <strong>Understanding the ( K/G ) Ratio</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ductility-and-brittleness">2. <strong>Ductility and Brittleness</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#theoretical-background">3. <strong>Theoretical Background</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#empirical-observations">4. <strong>Empirical Observations</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mechanistic-interpretation">5. <strong>Mechanistic Interpretation</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#limitations-and-caveats">6. <strong>Limitations and Caveats</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#practical-implications">7. <strong>Practical Implications</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion">Conclusion</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-calculate-the-k-g-ratio-for-the-vrh-case">Step 1: Calculate the K/G Ratio for the VRH Case</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-handle-division-by-zero">Step 2: Handle Division by Zero</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-sort-the-dataframe-by-k-g-ratio">Step 3: Sort the DataFrame by K/G Ratio</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-4-select-the-first-n-data-points">Step 4: Select the First n Data Points</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-5-create-a-bar-plot">Step 5: Create a Bar Plot</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#complete-code-example">Complete Code Example</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Explanation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-create-a-list-of-highly-ductile-elements">Step 1: Create a List of Highly Ductile Elements</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-filter-the-dataframe-for-these-elements">Step 2: Filter the DataFrame for These Elements</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-calculate-the-k-g-ratio-for-the-vrh-case">Step 3: Calculate the K/G Ratio for the VRH Case</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-4-sort-the-dataframe-by-k-g-ratio">Step 4: Sort the DataFrame by K/G Ratio</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-5-plot-the-k-g-ratios">Step 5: Plot the K/G Ratios</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-6-verify-element-symbols">Step 6: Verify Element Symbols</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Complete Code Example</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Explanation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#modified-code">Modified Code:</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#explanation-of-changes">Explanation of Changes:</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="analyzing-datasets-by-machine-learning">
+<h1>Analyzing Datasets by Machine Learning<a class="headerlink" href="#analyzing-datasets-by-machine-learning" title="Link to this heading">#</a></h1>
+<p><strong>Author:</strong> Jörg Neugebauer</p>
+<p><strong>Affiliations:</strong> Max Planck Institute for Sustainable Materials</p>
+<p><strong>Objective:</strong></p>
+<ul class="simple">
+<li><p>Learn to find relevant datasets in the internet</p></li>
+<li><p>Load the dataset and transform it to a format suitable for ML analysis</p></li>
+<li><p>Analyse data set using ML tools</p></li>
+</ul>
+<p><strong>Example:</strong></p>
+<blockquote>
+<div><p>Cohemprehensive data set of elastic constants for a large number of inorganic materials</p>
+</div></blockquote>
+<section id="find-a-suitable-dataset">
+<h2>Find a suitable dataset<a class="headerlink" href="#find-a-suitable-dataset" title="Link to this heading">#</a></h2>
+<p>Perform a query (<em>Where do I find a comprehensive database with elastic constants</em>) on <a class="reference external" href="https://www.perplexity.ai/search/where-do-i-find-a-comprehensiv-_O7Nk5c6R8a8pRW8JwmrWw">perplexity </a></p>
+</section>
+<section id="comprehensive-databases-for-elastic-constants">
+<h2>Comprehensive Databases for Elastic Constants<a class="headerlink" href="#comprehensive-databases-for-elastic-constants" title="Link to this heading">#</a></h2>
+<p>Several comprehensive databases provide elastic constants (including full elastic tensors) for a wide variety of materials, particularly inorganic crystalline compounds. The most notable and widely used resources are:</p>
+<p><strong>Materials Project Elasticity Database</strong></p>
+<ul class="simple">
+<li><p>The Materials Project offers a large, systematically calculated database of elastic constants for over 10,000 inorganic materials. This includes the full elastic tensor, bulk modulus, shear modulus, and related properties. The data can be accessed through their website, downloaded as JSON files, or retrieved programmatically via their REST API[2][4].</p></li>
+<li><p>The Materials Project database is recognized as the world’s largest collection of calculated elastic properties for inorganic compounds, with continuous updates and additions[3][7].</p></li>
+<li><p>Access: <a class="reference external" href="https://www.materialsproject.org">www.materialsproject.org</a> and via their API[2][4].</p></li>
+</ul>
+<p><strong>Dryad/Charting the Complete Elastic Properties Dataset</strong></p>
+<ul class="simple">
+<li><p>The dataset associated with the publication “Charting the complete elastic properties of inorganic crystalline compounds” is available for direct download from Dryad. It contains full elastic tensors for over 1,100 inorganic compounds, with accompanying metadata and structure files[6].</p></li>
+<li><p>Access: <a class="reference external" href="https://datadryad.org/stash/dataset/doi:10.5061/dryad.h505v">Dryad repository</a>[6].</p></li>
+</ul>
+<p><strong>JARVIS-FF Elastic Constants Database</strong></p>
+<ul class="simple">
+<li><p>The JARVIS-FF database, hosted by NIST, provides elastic constants and energetics for over 1,400 materials using a wide range of empirical force fields and DFT calculations. It is designed for comparison across computational methods and includes both the data and the software tools used for analysis[8].</p></li>
+<li><p>Access: <a class="reference external" href="http://www.ctcms.nist.gov/~knc6/periodic.html">JARVIS-FF database</a>[8].</p></li>
+</ul>
+<p><strong>Additional Resources</strong></p>
+<ul class="simple">
+<li><p>MatWeb is a general materials property database that includes some elastic constants, though it is less systematic and comprehensive for full elastic tensors compared to the above sources[5].</p></li>
+</ul>
+</section>
+<section id="summary-table">
+<h2>Summary Table<a class="headerlink" href="#summary-table" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Database Name</p></th>
+<th class="head"><p>Materials Covered</p></th>
+<th class="head"><p>Data Type</p></th>
+<th class="head"><p>Access Method</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Materials Project</p></td>
+<td><p>&gt;10,000 inorganic</p></td>
+<td><p>Full elastic tensor, moduli</p></td>
+<td><p>Web, API, JSON download</p></td>
+</tr>
+<tr class="row-odd"><td><p>Dryad (Asta et al.)</p></td>
+<td><p>~1,100 inorganic</p></td>
+<td><p>Full elastic tensor, metadata</p></td>
+<td><p>Direct download (JSON)</p></td>
+</tr>
+<tr class="row-even"><td><p>JARVIS-FF (NIST)</p></td>
+<td><p>&gt;1,400 inorganic/metals/ceramics</p></td>
+<td><p>Elastic constants, energetics</p></td>
+<td><p>Web interface, download</p></td>
+</tr>
+<tr class="row-odd"><td><p>MatWeb</p></td>
+<td><p>Various</p></td>
+<td><p>Elastic moduli (limited)</p></td>
+<td><p>Web search</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="how-to-access">
+<h2>How to Access<a class="headerlink" href="#how-to-access" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><strong>Materials Project</strong>: Register for a free account, then search for a material and view/download its elastic constants. Programmatic access is available for bulk data[2][4].</p></li>
+<li><p><strong>Dryad Dataset</strong>: Download the full dataset as a JSON file for offline analysis[6].</p></li>
+<li><p><strong>JARVIS-FF</strong>: Use the web interface to search, compare, and download elastic constants for a wide range of materials[8].</p></li>
+</ul>
+<p>These databases are widely used in materials science for research, design, and screening of materials with targeted mechanical properties.</p>
+<p>Citations:
+[1] <a class="reference external" href="https://www.compmatphys.org/topics/a-database-of-elastic-constants/">https://www.compmatphys.org/topics/a-database-of-elastic-constants/</a>
+[2] <a class="reference external" href="https://docs.materialsproject.org/methodology/materials-methodology/elasticity">https://docs.materialsproject.org/methodology/materials-methodology/elasticity</a>
+[3] <a class="reference external" href="https://newscenter.lbl.gov/2015/04/06/accelerating-materials-discovery-with-worlds-largest-database-of-elastic-properties/">https://newscenter.lbl.gov/2015/04/06/accelerating-materials-discovery-with-worlds-largest-database-of-elastic-properties/</a>
+[4] <a class="reference external" href="https://www.nature.com/articles/sdata20159">https://www.nature.com/articles/sdata20159</a>
+[5] <a class="reference external" href="https://engineering.stackexchange.com/questions/18252/database-of-elastic-constants">https://engineering.stackexchange.com/questions/18252/database-of-elastic-constants</a>
+[6] <a class="reference external" href="https://datadryad.org/stash/dataset/doi:10.5061/dryad.h505v">https://datadryad.org/stash/dataset/doi:10.5061/dryad.h505v</a>
+[7] <a class="reference external" href="https://mse.berkeley.edu/2015/05/accelerating-materials-discovery-with-worlds-largest-database-of-elastic-properties/">https://mse.berkeley.edu/2015/05/accelerating-materials-discovery-with-worlds-largest-database-of-elastic-properties/</a>
+[8] <a class="reference external" href="https://figshare.com/articles/dataset/JARVIS-FF_Elastic_constants_/5825940">https://figshare.com/articles/dataset/JARVIS-FF_Elastic_constants_/5825940</a>
+[9] <a class="reference external" href="https://docs.quantumatk.com/manual/Types/ElasticConstants/ElasticConstants.html">https://docs.quantumatk.com/manual/Types/ElasticConstants/ElasticConstants.html</a></p>
+<hr class="docutils" />
+<p>Answer from Perplexity: <a class="reference external" href="https://www.perplexity.ai/search/where-do-i-find-a-comprehensiv-_O7Nk5c6R8a8pRW8JwmrWw?utm_source=copy_output">https://www.perplexity.ai/search/where-do-i-find-a-comprehensiv-_O7Nk5c6R8a8pRW8JwmrWw?utm_source=copy_output</a></p>
+<p>Let’s take the open data set where we do not need to register. Download the json file from the Web page <a class="reference external" href="https://datadryad.org/dataset/doi:10.5061/dryad.h505v">link</a></p>
+<section id="the-following-chat-is-created-using-deepseek-r1-distill-llama-70b">
+<h3>The following chat is created using DeepSeek R1 Distill Llama 70B<a class="headerlink" href="#the-following-chat-is-created-using-deepseek-r1-distill-llama-70b" title="Link to this heading">#</a></h3>
+<p><strong>How do I read in a json file in my download directory using python and a jupyter notebook?</strong></p>
+<p>To read a JSON file in your download directory using Python and Jupyter Notebook, you can follow these steps:</p>
+<ol class="arabic simple">
+<li><p><strong>Import the necessary modules</strong>:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">json</span></code> for handling JSON data.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">os</span></code> for handling file paths.</p></li>
+</ul>
+</li>
+<li><p><strong>Locate the file</strong>:</p>
+<ul class="simple">
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">os.path.expanduser('~')</span></code> to get the path to your home directory.</p></li>
+<li><p>Join this with the path to your Downloads folder.</p></li>
+</ul>
+</li>
+<li><p><strong>Specify the filename</strong>:</p>
+<ul class="simple">
+<li><p>Replace <code class="docutils literal notranslate"><span class="pre">'file.json'</span></code> with the name of your JSON file.</p></li>
+</ul>
+</li>
+<li><p><strong>Construct the full path</strong>:</p>
+<ul class="simple">
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">os.path.join()</span></code> to create the full path to your JSON file.</p></li>
+</ul>
+</li>
+<li><p><strong>Read the JSON file</strong>:</p>
+<ul class="simple">
+<li><p>Use a <code class="docutils literal notranslate"><span class="pre">with</span> <span class="pre">open()</span></code> statement to open and read the file.</p></li>
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">json.load()</span></code> to parse the JSON data.</p></li>
+</ul>
+</li>
+</ol>
+<p>Here’s the code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+
+<span class="c1"># Get the path to the Downloads directory</span>
+<span class="n">downloads_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">expanduser</span><span class="p">(</span><span class="s1">&#39;~&#39;</span><span class="p">),</span> <span class="s1">&#39;Downloads&#39;</span><span class="p">)</span>
+
+<span class="c1"># Specify the filename</span>
+<span class="n">filename</span> <span class="o">=</span> <span class="s1">&#39;file.json&#39;</span>
+
+<span class="c1"># Construct the full path to the JSON file</span>
+<span class="n">full_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">downloads_path</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
+
+<span class="c1"># Read the JSON file</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">full_path</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>
+
+<span class="c1"># Now you can work with the data</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="explanation">
+<h3>Explanation:<a class="headerlink" href="#explanation" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Importing modules</strong>: The <code class="docutils literal notranslate"><span class="pre">json</span></code> module is used to parse JSON data, and <code class="docutils literal notranslate"><span class="pre">os</span></code> is used to handle file paths in a way that works across different operating systems.</p></li>
+<li><p><strong>Finding the Downloads directory</strong>: <code class="docutils literal notranslate"><span class="pre">os.path.expanduser('~')</span></code> gives the path to your home directory, and <code class="docutils literal notranslate"><span class="pre">os.path.join()</span></code> is used to safely join paths together.</p></li>
+<li><p><strong>Opening and reading the file</strong>: The <code class="docutils literal notranslate"><span class="pre">with</span> <span class="pre">open()</span></code> statement ensures the file is properly closed after reading. <code class="docutils literal notranslate"><span class="pre">json.load()</span></code> parses the JSON data into a Python object (like a dictionary or list).</p></li>
+<li><p><strong>Error handling</strong>: If the file isn’t found, you’ll get a <code class="docutils literal notranslate"><span class="pre">FileNotFoundError</span></code>. Make sure the filename and path are correct.</p></li>
+</ul>
+<p>You can now use the <code class="docutils literal notranslate"><span class="pre">data</span></code> variable to work with the contents of your JSON file.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+
+<span class="c1"># Get the path to the Downloads directory</span>
+<span class="c1"># downloads_path = os.path.join(os.path.expanduser(&#39;~&#39;), &#39;Downloads&#39;)</span>
+
+<span class="c1"># Specify the filename</span>
+<span class="n">filename</span> <span class="o">=</span> <span class="s1">&#39;ec.json&#39;</span>
+
+<span class="c1"># Construct the full path to the JSON file</span>
+<span class="c1"># full_path = os.path.join(downloads_path, filename)</span>
+<span class="n">full_path</span> <span class="o">=</span> <span class="n">filename</span>
+
+<span class="c1"># Read the JSON file</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">full_path</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>
+
+<span class="c1"># Now you can work with the data</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>IOPub data rate exceeded.
+The Jupyter server will temporarily stop sending output
+to the client in order to avoid crashing it.
+To change this limit, set the config variable
+`--ServerApp.iopub_data_rate_limit`.
+
+Current values:
+ServerApp.iopub_data_rate_limit=1000000.0 (bytes/sec)
+ServerApp.rate_limit_window=3.0 (secs)
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>The data appears to be too complex for print. How do I visualize the content of the data?</strong></p>
+<p>When dealing with complex JSON data, simply printing it can be overwhelming. Instead, you can use various methods to visualize and explore the data in a more structured and readable way. Here are a few approaches:</p>
+</section>
+<section id="pretty-print-the-json-data">
+<h3>1. <strong>Pretty Print the JSON Data</strong><a class="headerlink" href="#pretty-print-the-json-data" title="Link to this heading">#</a></h3>
+<p>You can use the <code class="docutils literal notranslate"><span class="pre">json.dumps()</span></code> function with the <code class="docutils literal notranslate"><span class="pre">indent</span></code> parameter to format the JSON output in a readable way.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+
+<span class="c1"># Assuming `data` contains your JSON data</span>
+<span class="n">pretty_data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">pretty_data</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This will print the JSON data with proper indentation, making it easier to read and understand the structure.</p>
+</section>
+<section id="use-the-pprint-module">
+<h3>2. <strong>Use the <code class="docutils literal notranslate"><span class="pre">pprint</span></code> Module</strong><a class="headerlink" href="#use-the-pprint-module" title="Link to this heading">#</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">pprint</span></code> module (pretty print) is useful for printing nested data structures in a more readable format.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pprint</span><span class="w"> </span><span class="kn">import</span> <span class="n">pprint</span>
+
+<span class="n">pprint</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This will print the data in a clean, hierarchical format.</p>
+</section>
+<section id="convert-json-to-a-pandas-dataframe">
+<h3>3. <strong>Convert JSON to a Pandas DataFrame</strong><a class="headerlink" href="#convert-json-to-a-pandas-dataframe" title="Link to this heading">#</a></h3>
+<p>If the JSON data is structured in a tabular format (e.g., a list of dictionaries), you can convert it into a pandas DataFrame for easier visualization and exploration.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+
+<span class="c1"># Convert the JSON data to a DataFrame</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">json_normalize</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+
+<span class="c1"># Display the DataFrame</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>  <span class="c1"># Show the first few rows</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">info</span><span class="p">())</span>  <span class="c1"># Show the structure and data types</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">describe</span><span class="p">())</span>  <span class="c1"># Show summary statistics</span>
+</pre></div>
+</div>
+<p>This is particularly useful if the JSON data represents tabular or semi-structured data.</p>
+</section>
+<section id="recursive-visualization-of-nested-data">
+<h3>4. <strong>Recursive Visualization of Nested Data</strong><a class="headerlink" href="#recursive-visualization-of-nested-data" title="Link to this heading">#</a></h3>
+<p>If the JSON data is deeply nested, you can write a recursive function to explore and visualize the structure.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">visualize_json</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39; &#39;</span> <span class="o">*</span> <span class="n">indent</span> <span class="o">+</span> <span class="s1">&#39;{&#39;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">data</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39; &#39;</span> <span class="o">*</span> <span class="n">indent</span> <span class="o">+</span> <span class="sa">f</span><span class="s1">&#39;&quot;</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s1">&quot;: &#39;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="p">(</span><span class="nb">dict</span><span class="p">,</span> <span class="nb">list</span><span class="p">)):</span>
+                <span class="nb">print</span><span class="p">()</span>
+                <span class="n">visualize_json</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">indent</span> <span class="o">+</span> <span class="mi">4</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39; &#39;</span> <span class="o">*</span> <span class="n">indent</span> <span class="o">+</span> <span class="s1">&#39;}&#39;</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39; &#39;</span> <span class="o">*</span> <span class="n">indent</span> <span class="o">+</span> <span class="s1">&#39;[&#39;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">data</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="p">(</span><span class="nb">dict</span><span class="p">,</span> <span class="nb">list</span><span class="p">)):</span>
+                <span class="nb">print</span><span class="p">()</span>
+                <span class="n">visualize_json</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="n">indent</span> <span class="o">+</span> <span class="mi">4</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39; &#39;</span> <span class="o">*</span> <span class="n">indent</span> <span class="o">+</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">item</span><span class="si">}</span><span class="s1">,&#39;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39; &#39;</span> <span class="o">*</span> <span class="n">indent</span> <span class="o">+</span> <span class="s1">&#39;]&#39;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39; &#39;</span> <span class="o">*</span> <span class="n">indent</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">data</span><span class="p">))</span>
+
+<span class="c1"># Call the function</span>
+<span class="n">visualize_json</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This will print the JSON data in a nested, indented format, making it easier to see the hierarchy.</p>
+</section>
+<section id="interactive-visualization-with-plotly">
+<h3>5. <strong>Interactive Visualization with Plotly</strong><a class="headerlink" href="#interactive-visualization-with-plotly" title="Link to this heading">#</a></h3>
+<p>If you want to create an interactive visualization, you can use Plotly to generate a collapsible tree or table.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">plotly.express</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">px</span>
+
+<span class="c1"># Convert the JSON data to a DataFrame (if applicable)</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">json_normalize</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+
+<span class="c1"># Create an interactive table</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">px</span><span class="o">.</span><span class="n">dataframe_to_table</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>This will create an interactive table that you can scroll through and explore in your Jupyter Notebook.</p>
+</section>
+<section id="use-a-json-viewer-in-jupyter-notebook">
+<h3>6. <strong>Use a JSON Viewer in Jupyter Notebook</strong><a class="headerlink" href="#use-a-json-viewer-in-jupyter-notebook" title="Link to this heading">#</a></h3>
+<p>If you’re working in Jupyter Notebook, you can use the <code class="docutils literal notranslate"><span class="pre">json_viewer</span></code> package or extensions like <code class="docutils literal notranslate"><span class="pre">jupyterlab-json</span></code> to visualize JSON data interactively.</p>
+<p>First, install the package:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>json_viewer
+</pre></div>
+</div>
+<p>Then, use it in your notebook:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">json_viewer</span><span class="w"> </span><span class="kn">import</span> <span class="n">view_json</span>
+
+<span class="n">view_json</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This will render the JSON data in a collapsible, interactive tree structure.</p>
+</section>
+<section id="summary">
+<h3>Summary<a class="headerlink" href="#summary" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>For simple JSON data, use <code class="docutils literal notranslate"><span class="pre">json.dumps()</span></code> with <code class="docutils literal notranslate"><span class="pre">indent</span></code> or <code class="docutils literal notranslate"><span class="pre">pprint</span></code>.</p></li>
+<li><p>For tabular data, convert it to a pandas DataFrame.</p></li>
+<li><p>For deeply nested or complex data, use recursive visualization or interactive tools like Plotly or JSON Viewer.</p></li>
+</ul>
+<p>Choose the method that best fits the structure and complexity of your JSON data.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+
+<span class="c1"># Convert the JSON data to a DataFrame</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">json_normalize</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+
+<span class="c1"># Display the DataFrame</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>  <span class="c1"># Show the first few rows</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">info</span><span class="p">())</span>  <span class="c1"># Show the structure and data types</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">describe</span><span class="p">())</span>  <span class="c1"># Show summary statistics</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>      G_Reuss       G_VRH     G_Voigt     K_Reuss       K_VRH     K_Voigt  \
+0   96.844535   97.141604   97.438674  194.267623  194.268884  194.270146   
+1   93.939650   96.252006   98.564362  173.647763  175.449907  177.252050   
+2  120.962289  130.112955  139.263621  295.077545  295.077545  295.077545   
+3   12.205989   15.101901   17.997812   49.025963   49.130670   49.235377   
+4  100.110773  101.947798  103.784823  255.055257  256.768081  258.480904   
+
+                                   compliance_tensor  elastic_anisotropy  \
+0  [[0.004385293093993621, -0.001607069355899203,...            0.030688   
+1  [[0.003771542894966233, -0.0008442298287092793...            0.266910   
+2  [[0.0019959391925841573, -0.000433146670736493...            0.756489   
+3  [[0.02164714390863595, -0.005207263618160259, ...            2.376805   
+4  [[0.0041021429772506385, -0.001272204332729522...            0.196930   
+
+                                      elastic_tensor  \
+0  [[311.33514638650246, 144.45092552856926, 126....   
+1  [[306.93357350984974, 88.02634955100905, 105.6...   
+2  [[569.5291276937579, 157.8517489654999, 157.85...   
+3  [[69.28798774976904, 34.7875015216915, 37.3877...   
+4  [[349.3767766177825, 186.67131003104407, 176.4...   
+
+                             elastic_tensor_original    formula  \
+0  [[311.33514638650246, 144.45092552856926, 126....    Nb4CoSi   
+1  [[306.93357350984974, 88.02634955100905, 105.6...  Al(CoSi)2   
+2  [[569.5291276937579, 157.8517489654999, 157.85...       SiOs   
+3  [[70.13259066665267, 40.60474945058445, 37.387...         Ga   
+4  [[407.4791016459293, 176.4759188081947, 213.83...      SiRu2   
+
+   kpoint_density material_id  nsites  poisson_ratio  \
+0            7000    mp-10003      12       0.285701   
+1            7000    mp-10010       5       0.268105   
+2            7000    mp-10015       2       0.307780   
+3            7000    mp-10021       4       0.360593   
+4            7000    mp-10025      12       0.324682   
+
+                                              poscar  space_group  \
+0  Nb8 Co2 Si2\n1.0\n6.221780 0.000000 0.000000\n...          124   
+1  Al1 Co2 Si2\n1.0\n3.932782 0.000000 0.000000\n...          164   
+2  Si1 Os1\n1.0\n2.960692 0.000000 0.000000\n0.00...          221   
+3  Ga4\n1.0\n2.803229 0.000000 0.000000\n0.000000...           63   
+4  Si4 Ru8\n1.0\n4.037706 0.000000 0.000000\n0.00...           62   
+
+                                           structure      volume  
+0  #\#CIF1.1\n###################################...  194.419802  
+1  #\#CIF1.1\n###################################...   61.987320  
+2  #\#CIF1.1\n###################################...   25.952539  
+3  #\#CIF1.1\n###################################...   76.721433  
+4  #\#CIF1.1\n###################################...  160.300999  
+&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
+RangeIndex: 1181 entries, 0 to 1180
+Data columns (total 19 columns):
+ #   Column                   Non-Null Count  Dtype  
+---  ------                   --------------  -----  
+ 0   G_Reuss                  1181 non-null   float64
+ 1   G_VRH                    1181 non-null   float64
+ 2   G_Voigt                  1181 non-null   float64
+ 3   K_Reuss                  1181 non-null   float64
+ 4   K_VRH                    1181 non-null   float64
+ 5   K_Voigt                  1181 non-null   float64
+ 6   compliance_tensor        1181 non-null   object 
+ 7   elastic_anisotropy       1181 non-null   float64
+ 8   elastic_tensor           1181 non-null   object 
+ 9   elastic_tensor_original  1181 non-null   object 
+ 10  formula                  1181 non-null   object 
+ 11  kpoint_density           1181 non-null   int64  
+ 12  material_id              1181 non-null   object 
+ 13  nsites                   1181 non-null   int64  
+ 14  poisson_ratio            1181 non-null   float64
+ 15  poscar                   1181 non-null   object 
+ 16  space_group              1181 non-null   int64  
+ 17  structure                1181 non-null   object 
+ 18  volume                   1181 non-null   float64
+dtypes: float64(9), int64(3), object(7)
+memory usage: 175.4+ KB
+None
+           G_Reuss        G_VRH      G_Voigt      K_Reuss        K_VRH  \
+count  1181.000000  1181.000000  1181.000000  1181.000000  1181.000000   
+mean     64.050568    67.543145    71.035720   135.171392   136.259661   
+std      44.696380    44.579408    45.388731    73.582579    72.886978   
+min       1.870270     2.722175     3.574080     4.714976     6.476135   
+25%      30.244413    34.117959    37.270657    74.960699    76.435350   
+50%      56.263878    59.735163    62.635382   129.984790   130.382766   
+75%      86.979486    91.332142    95.785011   189.195104   189.574194   
+max     520.845926   522.921225   524.996524   435.658754   435.661487   
+
+           K_Voigt  elastic_anisotropy  kpoint_density       nsites  \
+count  1181.000000         1181.000000     1181.000000  1181.000000   
+mean    137.347932            2.145013     7536.833192    12.425910   
+std      72.922887           19.140097     3446.890979    11.817997   
+min       6.476138            0.000005     1000.000000     2.000000   
+25%      76.520333            0.145030     7000.000000     5.000000   
+50%     131.849056            0.355287     7000.000000    10.000000   
+75%     190.912352            0.923117     7000.000000    16.000000   
+max     435.664220          397.297866    45000.000000   152.000000   
+
+       poisson_ratio  space_group       volume  
+count    1181.000000  1181.000000  1181.000000  
+mean        0.287401   163.403895   207.177098  
+std         0.062177    65.040733   192.355747  
+min         0.042582     4.000000    15.850527  
+25%         0.249159   124.000000    83.944059  
+50%         0.290198   193.000000   168.920404  
+75%         0.328808   221.000000   261.420345  
+max         0.467523   229.000000  2398.906164  
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>The dataset contains data on elastic constants. The column headings are: G_Reuss       G_VRH     G_Voigt     K_Reuss       K_VRH     K_Voigt. Explain the meaning of these names.</strong></p>
+<p>The column headings in your dataset represent different methods used to estimate the shear (G) and bulk (K) moduli of a material. Here’s a breakdown of each term:</p>
+<ol class="arabic simple">
+<li><p><strong>G_Reuss</strong>: This is the shear modulus calculated using the Reuss model. The Reuss model assumes uniform stress across the material and provides a lower bound for the elastic moduli.</p></li>
+<li><p><strong>G_VRH</strong>: This stands for the shear modulus calculated using the Voigt-Reuss-Hill model. The Hill model, developed by Rodney Hill, averages the Reuss and Voigt bounds, offering a more accurate estimate for polycrystalline materials.</p></li>
+<li><p><strong>G_Voigt</strong>: This is the shear modulus calculated using the Voigt model. The Voigt model assumes uniform strain and provides an upper bound for the elastic moduli.</p></li>
+<li><p><strong>K_Reuss</strong>: This is the bulk modulus calculated using the Reuss model, providing a lower bound for the bulk modulus.</p></li>
+<li><p><strong>K_VRH</strong>: This stands for the bulk modulus calculated using the Voigt-Reuss-Hill model, offering an average of the Reuss and Voigt bounds.</p></li>
+<li><p><strong>K_Voigt</strong>: This is the bulk modulus calculated using the Voigt model, providing an upper bound for the bulk modulus.</p></li>
+</ol>
+<p>In summary, these columns represent estimates of the shear and bulk moduli using different averaging methods: Reuss (lower bound), Voigt (upper bound), and Hill (average of Reuss and Voigt).</p>
+<p><strong>How do these quantities relate to the mechanical properties of a material? What about e.g. ductility?</strong></p>
+<p>The elastic constants, such as the shear modulus (G) and bulk modulus (K), provide critical insights into a material’s response to stress. Here’s a structured explanation of how these constants relate to mechanical properties like ductility:</p>
+<ol class="arabic simple">
+<li><p><strong>Shear Modulus (G):</strong></p>
+<ul class="simple">
+<li><p>The shear modulus measures a material’s resistance to shear stress, which causes deformation by sliding along a plane.</p></li>
+<li><p>A higher shear modulus indicates a stiffer material that is more resistant to shear deformation.</p></li>
+</ul>
+</li>
+<li><p><strong>Bulk Modulus (K):</strong></p>
+<ul class="simple">
+<li><p>The bulk modulus measures a material’s resistance to hydrostatic pressure or uniform pressure from all sides.</p></li>
+<li><p>A higher bulk modulus suggests that the material is more resistant to volume changes under pressure.</p></li>
+</ul>
+</li>
+<li><p><strong>Relationship Between Elastic Constants and Ductility:</strong></p>
+<ul class="simple">
+<li><p>Ductility is the ability of a material to undergo plastic deformation without fracture. While elastic constants pertain to reversible, elastic behavior, there is an indirect relationship with ductility.</p></li>
+<li><p>The ratio of the bulk modulus to the shear modulus (K/G) can provide insights into ductility. A higher K/G ratio may indicate greater ductility, as it suggests the material is more resistant to volume changes, potentially allowing for more plastic deformation before fracture.</p></li>
+</ul>
+</li>
+<li><p><strong>Reuss, Voigt, and Hill Models:</strong></p>
+<ul class="simple">
+<li><p>These models estimate the elastic moduli for polycrystalline materials based on single-crystal elastic constants.</p></li>
+<li><p>The Reuss model assumes uniform stress, the Voigt model assumes uniform strain, and the Hill model averages these two bounds.</p></li>
+<li><p>While these models influence how we estimate the moduli, their specific approaches may not directly affect the relationship between elastic constants and ductility.</p></li>
+</ul>
+</li>
+</ol>
+<p>In summary, elastic constants like G and K provide fundamental information about a material’s elastic response to stress. While they do not directly dictate ductility, ratios such as K/G can offer insights into a material’s potential for plastic deformation and ductility when considered alongside other material properties.</p>
+<p><strong>Discuss in more detail the relationship between K/G and ductility. Is there a critical value for this ratio that divides between ductile and brittle materials?</strong></p>
+<think>
+<p>The relationship between the bulk modulus (K) and the shear modulus (G), expressed as the ratio ( K/G ), has been studied extensively in materials science to understand its implications on material behavior, particularly ductility and brittleness. Here’s a detailed discussion:</p>
+</section>
+<section id="understanding-the-k-g-ratio">
+<h3>1. <strong>Understanding the ( K/G ) Ratio</strong><a class="headerlink" href="#understanding-the-k-g-ratio" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Bulk Modulus (K):</strong> Measures resistance to volume change under hydrostatic pressure.</p></li>
+<li><p><strong>Shear Modulus (G):</strong> Measures resistance to shape change under shear stress.</p></li>
+<li><p>The ratio ( K/G ) provides insight into the material’s response to different types of stress. A higher ( K/G ) indicates that the material is more resistant to volume changes relative to shear deformations.</p></li>
+</ul>
+</section>
+<section id="ductility-and-brittleness">
+<h3>2. <strong>Ductility and Brittleness</strong><a class="headerlink" href="#ductility-and-brittleness" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Ductility:</strong> The ability of a material to undergo significant plastic deformation before fracture.</p></li>
+<li><p><strong>Brittleness:</strong> The tendency of a material to fracture with little or no plastic deformation.</p></li>
+</ul>
+</section>
+<section id="theoretical-background">
+<h3>3. <strong>Theoretical Background</strong><a class="headerlink" href="#theoretical-background" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>The ( K/G ) ratio is related to the Poisson’s ratio (( \nu )) through the equation:
+[
+\nu = \frac{3K - G}{6K + G}
+]</p></li>
+<li><p>Poisson’s ratio is a measure of the lateral strain response to axial loading. A higher ( \nu ) (closer to 0.5) indicates a more ductile material, while a lower ( \nu ) suggests brittleness.</p></li>
+</ul>
+</section>
+<section id="empirical-observations">
+<h3>4. <strong>Empirical Observations</strong><a class="headerlink" href="#empirical-observations" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Critical ( K/G ) Ratio:</strong> Research suggests that a ( K/G ) ratio greater than approximately 1.75 may indicate a more ductile behavior, while values below this threshold are associated with brittleness.</p></li>
+<li><p><strong>Material Examples:</strong></p>
+<ul>
+<li><p>Metals (e.g., aluminum, copper) typically have higher ( K/G ) ratios and are ductile.</p></li>
+<li><p>Ceramics and glasses usually have lower ( K/G ) ratios and are brittle.</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="mechanistic-interpretation">
+<h3>5. <strong>Mechanistic Interpretation</strong><a class="headerlink" href="#mechanistic-interpretation" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>A higher ( K/G ) ratio implies that the material is more resistant to volume changes but less stiff against shear deformations. This allows the material to accommodate more plastic deformation before fracture.</p></li>
+<li><p>Conversely, a lower ( K/G ) ratio suggests that the material is more susceptible to shear-induced damage, leading to brittle fracture.</p></li>
+</ul>
+</section>
+<section id="limitations-and-caveats">
+<h3>6. <strong>Limitations and Caveats</strong><a class="headerlink" href="#limitations-and-caveats" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>The ( K/G ) ratio is not an absolute predictor of ductility. Other factors, such as crystal structure, temperature, and the presence of defects, also influence a material’s ductility.</p></li>
+<li><p>The critical ( K/G ) value of 1.75 is a general guideline and may vary depending on the specific material class and testing conditions.</p></li>
+</ul>
+</section>
+<section id="practical-implications">
+<h3>7. <strong>Practical Implications</strong><a class="headerlink" href="#practical-implications" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Material Selection:</strong> Engineers use the ( K/G ) ratio as one of several criteria for selecting materials for applications requiring high ductility or resistance to brittle fracture.</p></li>
+<li><p><strong>Material Design:</strong> Understanding the relationship between ( K/G ) and ductility can guide the development of new materials with tailored mechanical properties.</p></li>
+</ul>
+</section>
+<section id="conclusion">
+<h3>Conclusion<a class="headerlink" href="#conclusion" title="Link to this heading">#</a></h3>
+<p>The ( K/G ) ratio serves as a useful indicator of a material’s potential for ductility or brittleness, with a critical value around 1.75 dividing ductile from brittle behavior. However, it is essential to consider this ratio in conjunction with other material properties and testing conditions for a comprehensive understanding of material behavior.</p>
+<p>OK, let’s plot the K/G ratio for all compounds in the dataset. Let’s use the VHR dataset.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
+<span class="c1"># Calculate the K/G ratio for the VRH case</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;K_over_G_VRH&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;K_VRH&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;G_VRH&#39;</span><span class="p">]</span>
+
+<span class="c1"># Ensure there are no division by zero errors</span>
+<span class="k">if</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;G_VRH&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">eq</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">any</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Warning: G_VRH contains zero values. Consider handling them appropriately.&quot;</span><span class="p">)</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;G_VRH&#39;</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">]</span>  <span class="c1"># Remove rows with zero G_VRH</span>
+
+<span class="c1"># Prepare for plotting</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+
+<span class="c1"># Create a bar plot</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;formula&#39;</span><span class="p">],</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;K_over_G_VRH&#39;</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Structure ID&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;K/G Ratio (VRH)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;K/G Ratio for VRH Case Across Structures&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">rotation</span><span class="o">=</span><span class="mi">45</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/9980c72525379990515b14622e5cd633ce02456240d389817f7939bc3f7412d1.png" src="../_images/9980c72525379990515b14622e5cd633ce02456240d389817f7939bc3f7412d1.png" />
+</div>
+</div>
+<p><strong>Sort the B/G ratio and plot the first n data points</strong></p>
+<p>To sort the K/G ratio and plot the first n data points, follow these steps:</p>
+</section>
+<section id="step-1-calculate-the-k-g-ratio-for-the-vrh-case">
+<h3>Step 1: Calculate the K/G Ratio for the VRH Case<a class="headerlink" href="#step-1-calculate-the-k-g-ratio-for-the-vrh-case" title="Link to this heading">#</a></h3>
+<p>First, create a new column in your DataFrame to store the K/G ratio for the VRH case.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Calculate the K/G ratio for the VRH case</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;K_over_G_VRH&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;K_VRH&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;G_VRH&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</section>
+<section id="step-2-handle-division-by-zero">
+<h3>Step 2: Handle Division by Zero<a class="headerlink" href="#step-2-handle-division-by-zero" title="Link to this heading">#</a></h3>
+<p>Ensure there are no zero values in the <code class="docutils literal notranslate"><span class="pre">G_VRH</span></code> column to avoid division by zero errors.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Check for zero values in G_VRH</span>
+<span class="k">if</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;G_VRH&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">eq</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">any</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Warning: G_VRH contains zero values. Removing affected rows.&quot;</span><span class="p">)</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;G_VRH&#39;</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+</section>
+<section id="step-3-sort-the-dataframe-by-k-g-ratio">
+<h3>Step 3: Sort the DataFrame by K/G Ratio<a class="headerlink" href="#step-3-sort-the-dataframe-by-k-g-ratio" title="Link to this heading">#</a></h3>
+<p>Sort the DataFrame based on the <code class="docutils literal notranslate"><span class="pre">K_over_G_VRH</span></code> column in ascending order.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Sort the DataFrame by K_over_G_VRH in ascending order</span>
+<span class="n">df_sorted</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s1">&#39;K_over_G_VRH&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="step-4-select-the-first-n-data-points">
+<h3>Step 4: Select the First n Data Points<a class="headerlink" href="#step-4-select-the-first-n-data-points" title="Link to this heading">#</a></h3>
+<p>Choose the first n rows from the sorted DataFrame.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">n</span> <span class="o">=</span> <span class="mi">10</span>  <span class="c1"># Define the number of data points to plot</span>
+<span class="n">df_first_n</span> <span class="o">=</span> <span class="n">df_sorted</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="step-5-create-a-bar-plot">
+<h3>Step 5: Create a Bar Plot<a class="headerlink" href="#step-5-create-a-bar-plot" title="Link to this heading">#</a></h3>
+<p>Use matplotlib to create a bar plot of the first n K/G ratios.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
+<span class="c1"># Create a bar plot</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">df_first_n</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">df_first_n</span><span class="p">[</span><span class="s1">&#39;K_over_G_VRH&#39;</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Material Index&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;K/G Ratio (VRH)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;First </span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s1"> K/G Ratios (VRH) in Ascending Order&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">rotation</span><span class="o">=</span><span class="mi">45</span><span class="p">)</span>  <span class="c1"># Rotate x-axis labels for better readability</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+<section id="complete-code-example">
+<h3>Complete Code Example<a class="headerlink" href="#complete-code-example" title="Link to this heading">#</a></h3>
+<p>Here’s the complete code with all the steps included:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
+<span class="c1"># Sample DataFrame creation (replace with your actual data loading)</span>
+<span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;G_Reuss&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">50</span><span class="p">,</span> <span class="mi">60</span><span class="p">,</span> <span class="mi">55</span><span class="p">,</span> <span class="mi">65</span><span class="p">,</span> <span class="mi">58</span><span class="p">,</span> <span class="mi">62</span><span class="p">,</span> <span class="mi">59</span><span class="p">,</span> <span class="mi">61</span><span class="p">,</span> <span class="mi">63</span><span class="p">,</span> <span class="mi">64</span><span class="p">],</span>
+    <span class="s1">&#39;G_VRH&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">52</span><span class="p">,</span> <span class="mi">61</span><span class="p">,</span> <span class="mi">57</span><span class="p">,</span> <span class="mi">66</span><span class="p">,</span> <span class="mi">59</span><span class="p">,</span> <span class="mi">63</span><span class="p">,</span> <span class="mi">60</span><span class="p">,</span> <span class="mi">62</span><span class="p">,</span> <span class="mi">64</span><span class="p">,</span> <span class="mi">65</span><span class="p">],</span>
+    <span class="s1">&#39;G_Voigt&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">53</span><span class="p">,</span> <span class="mi">62</span><span class="p">,</span> <span class="mi">58</span><span class="p">,</span> <span class="mi">67</span><span class="p">,</span> <span class="mi">60</span><span class="p">,</span> <span class="mi">64</span><span class="p">,</span> <span class="mi">61</span><span class="p">,</span> <span class="mi">63</span><span class="p">,</span> <span class="mi">65</span><span class="p">,</span> <span class="mi">66</span><span class="p">],</span>
+    <span class="s1">&#39;K_Reuss&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">100</span><span class="p">,</span> <span class="mi">110</span><span class="p">,</span> <span class="mi">105</span><span class="p">,</span> <span class="mi">115</span><span class="p">,</span> <span class="mi">108</span><span class="p">,</span> <span class="mi">112</span><span class="p">,</span> <span class="mi">107</span><span class="p">,</span> <span class="mi">111</span><span class="p">,</span> <span class="mi">113</span><span class="p">,</span> <span class="mi">114</span><span class="p">],</span>
+    <span class="s1">&#39;K_VRH&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">102</span><span class="p">,</span> <span class="mi">112</span><span class="p">,</span> <span class="mi">107</span><span class="p">,</span> <span class="mi">116</span><span class="p">,</span> <span class="mi">109</span><span class="p">,</span> <span class="mi">113</span><span class="p">,</span> <span class="mi">108</span><span class="p">,</span> <span class="mi">112</span><span class="p">,</span> <span class="mi">114</span><span class="p">,</span> <span class="mi">115</span><span class="p">],</span>
+    <span class="s1">&#39;K_Voigt&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">103</span><span class="p">,</span> <span class="mi">113</span><span class="p">,</span> <span class="mi">108</span><span class="p">,</span> <span class="mi">117</span><span class="p">,</span> <span class="mi">110</span><span class="p">,</span> <span class="mi">114</span><span class="p">,</span> <span class="mi">109</span><span class="p">,</span> <span class="mi">113</span><span class="p">,</span> <span class="mi">115</span><span class="p">,</span> <span class="mi">116</span><span class="p">],</span>
+    <span class="s1">&#39;structure_id&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;D&#39;</span><span class="p">,</span> <span class="s1">&#39;E&#39;</span><span class="p">,</span> <span class="s1">&#39;F&#39;</span><span class="p">,</span> <span class="s1">&#39;G&#39;</span><span class="p">,</span> <span class="s1">&#39;H&#39;</span><span class="p">,</span> <span class="s1">&#39;I&#39;</span><span class="p">,</span> <span class="s1">&#39;J&#39;</span><span class="p">]</span>
+<span class="p">}</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+
+<span class="c1"># Calculate the K/G ratio for the VRH case</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;K_over_G_VRH&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;K_VRH&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;G_VRH&#39;</span><span class="p">]</span>
+
+<span class="c1"># Check for zero values in G_VRH</span>
+<span class="k">if</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;G_VRH&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">eq</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">any</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Warning: G_VRH contains zero values. Removing affected rows.&quot;</span><span class="p">)</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;G_VRH&#39;</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">]</span>
+
+<span class="c1"># Sort the DataFrame by K_over_G_VRH in ascending order</span>
+<span class="n">df_sorted</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s1">&#39;K_over_G_VRH&#39;</span><span class="p">)</span>
+
+<span class="c1"># Select the first n data points</span>
+<span class="n">n</span> <span class="o">=</span> <span class="mi">10</span>  <span class="c1"># Define the number of data points to plot</span>
+<span class="n">df_first_n</span> <span class="o">=</span> <span class="n">df_sorted</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+
+<span class="c1"># Create a bar plot</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">df_first_n</span><span class="p">[</span><span class="s1">&#39;structure_id&#39;</span><span class="p">],</span> <span class="n">df_first_n</span><span class="p">[</span><span class="s1">&#39;K_over_G_VRH&#39;</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Structure ID&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;K/G Ratio (VRH)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;First </span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s1"> K/G Ratios (VRH) in Ascending Order&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">rotation</span><span class="o">=</span><span class="mi">45</span><span class="p">)</span>  <span class="c1"># Rotate x-axis labels for better readability</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+<section id="id1">
+<h3>Explanation<a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
+<ol class="arabic simple">
+<li><p><strong>Data Preparation:</strong></p>
+<ul class="simple">
+<li><p>A sample DataFrame is created with columns for different elastic constants and a ‘structure_id’ for material identification.</p></li>
+</ul>
+</li>
+<li><p><strong>K/G Ratio Calculation:</strong></p>
+<ul class="simple">
+<li><p>A new column ‘K_over_G_VRH’ is added by dividing ‘K_VRH’ by ‘G_VRH’.</p></li>
+</ul>
+</li>
+<li><p><strong>Error Handling:</strong></p>
+<ul class="simple">
+<li><p>The code checks for zero values in ‘G_VRH’ to prevent division by zero errors and removes any affected rows.</p></li>
+</ul>
+</li>
+<li><p><strong>Sorting:</strong></p>
+<ul class="simple">
+<li><p>The DataFrame is sorted based on the ‘K_over_G_VRH’ column in ascending order to identify materials with the lowest K/G ratios.</p></li>
+</ul>
+</li>
+<li><p><strong>Selection and Plotting:</strong></p>
+<ul class="simple">
+<li><p>The first n rows are selected from the sorted DataFrame, and a bar plot is created to visualize these K/G ratios, making it easy to compare across different materials.</p></li>
+</ul>
+</li>
+</ol>
+<p>This approach ensures that you can effectively sort and visualize the K/G ratios, aiding in the analysis of the material’s mechanical properties.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Sort the DataFrame by K_over_G_VRH in ascending order</span>
+<span class="n">df_sorted</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s1">&#39;K_over_G_VRH&#39;</span><span class="p">)</span>
+
+<span class="c1"># Select the first n data points</span>
+<span class="n">n</span> <span class="o">=</span> <span class="mi">30</span>  <span class="c1"># Define the number of data points to plot</span>
+<span class="n">df_first_n</span> <span class="o">=</span> <span class="n">df_sorted</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+
+<span class="c1"># Create a bar plot</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">df_first_n</span><span class="p">[</span><span class="s1">&#39;formula&#39;</span><span class="p">],</span> <span class="n">df_first_n</span><span class="p">[</span><span class="s1">&#39;K_over_G_VRH&#39;</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Structure ID&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;K/G Ratio (VRH)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;First </span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s1"> K/G Ratios (VRH) in Ascending Order&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">rotation</span><span class="o">=</span><span class="mi">45</span><span class="p">)</span>  <span class="c1"># Rotate x-axis labels for better readability</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/fdd35748038c6b33c63ff336c2e761e5a6793c5e134cdc0c78e9c4d8aaa0081e.png" src="../_images/fdd35748038c6b33c63ff336c2e761e5a6793c5e134cdc0c78e9c4d8aaa0081e.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Sort the DataFrame by K_over_G_VRH in ascending order</span>
+<span class="n">df_sorted</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s1">&#39;K_over_G_VRH&#39;</span><span class="p">)</span>
+
+<span class="c1"># Select the first n data points</span>
+<span class="n">n</span> <span class="o">=</span> <span class="mi">30</span>  <span class="c1"># Define the number of data points to plot</span>
+<span class="n">df_first_n</span> <span class="o">=</span> <span class="n">df_sorted</span><span class="o">.</span><span class="n">tail</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+
+<span class="c1"># Create a bar plot</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">df_first_n</span><span class="p">[</span><span class="s1">&#39;formula&#39;</span><span class="p">],</span> <span class="n">df_first_n</span><span class="p">[</span><span class="s1">&#39;K_over_G_VRH&#39;</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Structure ID&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;K/G Ratio (VRH)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;First </span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s1"> K/G Ratios (VRH) in Ascending Order&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">rotation</span><span class="o">=</span><span class="mi">45</span><span class="p">)</span>  <span class="c1"># Rotate x-axis labels for better readability</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/ca76d9fff85058f74b04241cf7e47202c0cafd72149598bf291c23840fa03ce2.png" src="../_images/ca76d9fff85058f74b04241cf7e47202c0cafd72149598bf291c23840fa03ce2.png" />
+</div>
+</div>
+<p><strong>Provide examples of highly ductile materials</strong></p>
+<p><strong>Examples of Highly Ductile Materials</strong></p>
+<p>Highly ductile materials are those that can undergo significant plastic deformation without fracturing. This property is crucial in applications where flexibility and formability are essential. Below are some examples of highly ductile materials, primarily focusing on metals:</p>
+<ol class="arabic simple">
+<li><p><strong>Copper</strong>: Known for its excellent ductility, copper is widely used in electrical wiring and applications where high flexibility is required.</p></li>
+<li><p><strong>Aluminum</strong>: Aluminum alloys are highly ductile and are used in various applications, including foil, packaging, and structural components.</p></li>
+<li><p><strong>Gold</strong>: Gold is renowned for its high ductility and can be drawn into extremely thin wires or beaten into thin sheets.</p></li>
+<li><p><strong>Silver</strong>: Silver is highly ductile and is used in jewelry, electronics, and other applications where flexibility is needed.</p></li>
+<li><p><strong>Platinum</strong>: Platinum is a ductile metal used in jewelry, catalytic converters, and laboratory equipment.</p></li>
+<li><p><strong>Tungsten</strong>: While tungsten is very hard, it exhibits ductility when pure and is used in filaments and wear-resistant parts.</p></li>
+<li><p><strong>Nickel</strong>: Nickel is quite ductile and is often alloyed with other metals to enhance their properties.</p></li>
+<li><p><strong>Titanium</strong>: Known for its high strength-to-weight ratio, titanium is also fairly ductile, especially in its pure form, and is used in aerospace applications.</p></li>
+<li><p><strong>Lead</strong>: Lead is highly ductile and malleable, though its use has declined due to toxicity concerns.</p></li>
+<li><p><strong>Uranium</strong>: While not as ductile as the others, pure uranium can be shaped into various forms, though it becomes more brittle when alloyed.</p></li>
+</ol>
+<p>These metals are chosen for their ability to be shaped, stretched, or bent significantly without breaking, making them ideal for applications requiring high ductility.</p>
+<p><strong>Make a python list of these elements, use the element symbol rather than the full name</strong></p>
+<p>Here is the Python list of the element symbols for the highly ductile materials mentioned:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">highly_ductile_elements</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Cu&#39;</span><span class="p">,</span> <span class="s1">&#39;Al&#39;</span><span class="p">,</span> <span class="s1">&#39;Au&#39;</span><span class="p">,</span> <span class="s1">&#39;Ag&#39;</span><span class="p">,</span> <span class="s1">&#39;Pt&#39;</span><span class="p">,</span> <span class="s1">&#39;W&#39;</span><span class="p">,</span> <span class="s1">&#39;Ni&#39;</span><span class="p">,</span> <span class="s1">&#39;Ti&#39;</span><span class="p">,</span> <span class="s1">&#39;Pb&#39;</span><span class="p">,</span> <span class="s1">&#39;U&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+<p><strong>Use this list to extract from the pandas table these elements and plot the K/G ratio</strong></p>
+<p>To extract the elements from the pandas table and plot their K/G ratios, you can follow these steps:</p>
+</section>
+<section id="step-1-create-a-list-of-highly-ductile-elements">
+<h3>Step 1: Create a List of Highly Ductile Elements<a class="headerlink" href="#step-1-create-a-list-of-highly-ductile-elements" title="Link to this heading">#</a></h3>
+<p>First, define the list of highly ductile elements using their symbols:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">highly_ductile_elements</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Cu&#39;</span><span class="p">,</span> <span class="s1">&#39;Al&#39;</span><span class="p">,</span> <span class="s1">&#39;Au&#39;</span><span class="p">,</span> <span class="s1">&#39;Ag&#39;</span><span class="p">,</span> <span class="s1">&#39;Pt&#39;</span><span class="p">,</span> <span class="s1">&#39;W&#39;</span><span class="p">,</span> <span class="s1">&#39;Ni&#39;</span><span class="p">,</span> <span class="s1">&#39;Ti&#39;</span><span class="p">,</span> <span class="s1">&#39;Pb&#39;</span><span class="p">,</span> <span class="s1">&#39;U&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</section>
+<section id="step-2-filter-the-dataframe-for-these-elements">
+<h3>Step 2: Filter the DataFrame for These Elements<a class="headerlink" href="#step-2-filter-the-dataframe-for-these-elements" title="Link to this heading">#</a></h3>
+<p>Assuming your DataFrame has a column named <code class="docutils literal notranslate"><span class="pre">structure_id</span></code> that contains the element symbols, you can filter the DataFrame to include only the elements in your list:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Filter the DataFrame for the highly ductile elements</span>
+<span class="n">df_filtered</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;structure_id&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">highly_ductile_elements</span><span class="p">)]</span>
+</pre></div>
+</div>
+</section>
+<section id="step-3-calculate-the-k-g-ratio-for-the-vrh-case">
+<h3>Step 3: Calculate the K/G Ratio for the VRH Case<a class="headerlink" href="#step-3-calculate-the-k-g-ratio-for-the-vrh-case" title="Link to this heading">#</a></h3>
+<p>If you haven’t already, calculate the K/G ratio for the VRH case:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Calculate the K/G ratio for the VRH case</span>
+<span class="n">df_filtered</span><span class="p">[</span><span class="s1">&#39;K_over_G_VRH&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_filtered</span><span class="p">[</span><span class="s1">&#39;K_VRH&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="n">df_filtered</span><span class="p">[</span><span class="s1">&#39;G_VRH&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</section>
+<section id="step-4-sort-the-dataframe-by-k-g-ratio">
+<h3>Step 4: Sort the DataFrame by K/G Ratio<a class="headerlink" href="#step-4-sort-the-dataframe-by-k-g-ratio" title="Link to this heading">#</a></h3>
+<p>Sort the filtered DataFrame by the K/G ratio in ascending order:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Sort the DataFrame by K_over_G_VRH in ascending order</span>
+<span class="n">df_sorted</span> <span class="o">=</span> <span class="n">df_filtered</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s1">&#39;K_over_G_VRH&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="step-5-plot-the-k-g-ratios">
+<h3>Step 5: Plot the K/G Ratios<a class="headerlink" href="#step-5-plot-the-k-g-ratios" title="Link to this heading">#</a></h3>
+<p>Use matplotlib to create a bar plot of the K/G ratios for the highly ductile elements:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
+<span class="c1"># Create a bar plot</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">df_sorted</span><span class="p">[</span><span class="s1">&#39;structure_id&#39;</span><span class="p">],</span> <span class="n">df_sorted</span><span class="p">[</span><span class="s1">&#39;K_over_G_VRH&#39;</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Element&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;K/G Ratio (VRH)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;K/G Ratios for Highly Ductile Elements (VRH)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">rotation</span><span class="o">=</span><span class="mi">45</span><span class="p">)</span>  <span class="c1"># Rotate x-axis labels for better readability</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+<section id="step-6-verify-element-symbols">
+<h3>Step 6: Verify Element Symbols<a class="headerlink" href="#step-6-verify-element-symbols" title="Link to this heading">#</a></h3>
+<p>Ensure that the <code class="docutils literal notranslate"><span class="pre">structure_id</span></code> in your DataFrame matches the element symbols in your list. If the symbols in your DataFrame are in a different format (e.g., lowercase or with additional characters), you may need to adjust the filtering step accordingly.</p>
+</section>
+<section id="id2">
+<h3>Complete Code Example<a class="headerlink" href="#id2" title="Link to this heading">#</a></h3>
+<p>Here’s the complete code with all the steps included:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
+<span class="c1"># Sample DataFrame creation (replace with your actual data loading)</span>
+<span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;G_Reuss&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">50</span><span class="p">,</span> <span class="mi">60</span><span class="p">,</span> <span class="mi">55</span><span class="p">,</span> <span class="mi">65</span><span class="p">,</span> <span class="mi">58</span><span class="p">,</span> <span class="mi">62</span><span class="p">,</span> <span class="mi">59</span><span class="p">,</span> <span class="mi">61</span><span class="p">,</span> <span class="mi">63</span><span class="p">,</span> <span class="mi">64</span><span class="p">],</span>
+    <span class="s1">&#39;G_VRH&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">52</span><span class="p">,</span> <span class="mi">61</span><span class="p">,</span> <span class="mi">57</span><span class="p">,</span> <span class="mi">66</span><span class="p">,</span> <span class="mi">59</span><span class="p">,</span> <span class="mi">63</span><span class="p">,</span> <span class="mi">60</span><span class="p">,</span> <span class="mi">62</span><span class="p">,</span> <span class="mi">64</span><span class="p">,</span> <span class="mi">65</span><span class="p">],</span>
+    <span class="s1">&#39;G_Voigt&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">53</span><span class="p">,</span> <span class="mi">62</span><span class="p">,</span> <span class="mi">58</span><span class="p">,</span> <span class="mi">67</span><span class="p">,</span> <span class="mi">60</span><span class="p">,</span> <span class="mi">64</span><span class="p">,</span> <span class="mi">61</span><span class="p">,</span> <span class="mi">63</span><span class="p">,</span> <span class="mi">65</span><span class="p">,</span> <span class="mi">66</span><span class="p">],</span>
+    <span class="s1">&#39;K_Reuss&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">100</span><span class="p">,</span> <span class="mi">110</span><span class="p">,</span> <span class="mi">105</span><span class="p">,</span> <span class="mi">115</span><span class="p">,</span> <span class="mi">108</span><span class="p">,</span> <span class="mi">112</span><span class="p">,</span> <span class="mi">107</span><span class="p">,</span> <span class="mi">111</span><span class="p">,</span> <span class="mi">113</span><span class="p">,</span> <span class="mi">114</span><span class="p">],</span>
+    <span class="s1">&#39;K_VRH&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">102</span><span class="p">,</span> <span class="mi">112</span><span class="p">,</span> <span class="mi">107</span><span class="p">,</span> <span class="mi">116</span><span class="p">,</span> <span class="mi">109</span><span class="p">,</span> <span class="mi">113</span><span class="p">,</span> <span class="mi">108</span><span class="p">,</span> <span class="mi">112</span><span class="p">,</span> <span class="mi">114</span><span class="p">,</span> <span class="mi">115</span><span class="p">],</span>
+    <span class="s1">&#39;K_Voigt&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">103</span><span class="p">,</span> <span class="mi">113</span><span class="p">,</span> <span class="mi">108</span><span class="p">,</span> <span class="mi">117</span><span class="p">,</span> <span class="mi">110</span><span class="p">,</span> <span class="mi">114</span><span class="p">,</span> <span class="mi">109</span><span class="p">,</span> <span class="mi">113</span><span class="p">,</span> <span class="mi">115</span><span class="p">,</span> <span class="mi">116</span><span class="p">],</span>
+    <span class="s1">&#39;structure_id&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Cu&#39;</span><span class="p">,</span> <span class="s1">&#39;Al&#39;</span><span class="p">,</span> <span class="s1">&#39;Au&#39;</span><span class="p">,</span> <span class="s1">&#39;Ag&#39;</span><span class="p">,</span> <span class="s1">&#39;Pt&#39;</span><span class="p">,</span> <span class="s1">&#39;W&#39;</span><span class="p">,</span> <span class="s1">&#39;Ni&#39;</span><span class="p">,</span> <span class="s1">&#39;Ti&#39;</span><span class="p">,</span> <span class="s1">&#39;Pb&#39;</span><span class="p">,</span> <span class="s1">&#39;U&#39;</span><span class="p">]</span>
+<span class="p">}</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+
+<span class="c1"># List of highly ductile elements</span>
+<span class="n">highly_ductile_elements</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Cu&#39;</span><span class="p">,</span> <span class="s1">&#39;Al&#39;</span><span class="p">,</span> <span class="s1">&#39;Au&#39;</span><span class="p">,</span> <span class="s1">&#39;Ag&#39;</span><span class="p">,</span> <span class="s1">&#39;Pt&#39;</span><span class="p">,</span> <span class="s1">&#39;W&#39;</span><span class="p">,</span> <span class="s1">&#39;Ni&#39;</span><span class="p">,</span> <span class="s1">&#39;Ti&#39;</span><span class="p">,</span> <span class="s1">&#39;Pb&#39;</span><span class="p">,</span> <span class="s1">&#39;U&#39;</span><span class="p">]</span>
+
+<span class="c1"># Filter the DataFrame for the highly ductile elements</span>
+<span class="n">df_filtered</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;structure_id&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">highly_ductile_elements</span><span class="p">)]</span>
+
+<span class="c1"># Calculate the K/G ratio for the VRH case</span>
+<span class="n">df_filtered</span><span class="p">[</span><span class="s1">&#39;K_over_G_VRH&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_filtered</span><span class="p">[</span><span class="s1">&#39;K_VRH&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="n">df_filtered</span><span class="p">[</span><span class="s1">&#39;G_VRH&#39;</span><span class="p">]</span>
+
+<span class="c1"># Sort the DataFrame by K_over_G_VRH in ascending order</span>
+<span class="n">df_sorted</span> <span class="o">=</span> <span class="n">df_filtered</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s1">&#39;K_over_G_VRH&#39;</span><span class="p">)</span>
+
+<span class="c1"># Create a bar plot</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">df_sorted</span><span class="p">[</span><span class="s1">&#39;structure_id&#39;</span><span class="p">],</span> <span class="n">df_sorted</span><span class="p">[</span><span class="s1">&#39;K_over_G_VRH&#39;</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Element&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;K/G Ratio (VRH)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;K/G Ratios for Highly Ductile Elements (VRH)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">rotation</span><span class="o">=</span><span class="mi">45</span><span class="p">)</span>  <span class="c1"># Rotate x-axis labels for better readability</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+<section id="id3">
+<h3>Explanation<a class="headerlink" href="#id3" title="Link to this heading">#</a></h3>
+<ol class="arabic simple">
+<li><p><strong>Data Preparation:</strong></p>
+<ul class="simple">
+<li><p>A sample DataFrame is created with columns for different elastic constants and a <code class="docutils literal notranslate"><span class="pre">structure_id</span></code> column representing element symbols.</p></li>
+</ul>
+</li>
+<li><p><strong>Filtering:</strong></p>
+<ul class="simple">
+<li><p>The DataFrame is filtered to include only the elements in the <code class="docutils literal notranslate"><span class="pre">highly_ductile_elements</span></code> list.</p></li>
+</ul>
+</li>
+<li><p><strong>K/G Ratio Calculation:</strong></p>
+<ul class="simple">
+<li><p>The K/G ratio for the VRH case is calculated and stored in a new column.</p></li>
+</ul>
+</li>
+<li><p><strong>Sorting:</strong></p>
+<ul class="simple">
+<li><p>The filtered DataFrame is sorted by the K/G ratio in ascending order.</p></li>
+</ul>
+</li>
+<li><p><strong>Plotting:</strong></p>
+<ul class="simple">
+<li><p>A bar plot is created to visualize the K/G ratios for the highly ductile elements, making it easy to compare their mechanical properties.</p></li>
+</ul>
+</li>
+</ol>
+<p>This approach ensures that you can effectively extract and visualize the K/G ratios for the highly ductile materials in your dataset.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># List of highly ductile elements</span>
+<span class="n">highly_ductile_elements</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Cu&#39;</span><span class="p">,</span> <span class="s1">&#39;Al&#39;</span><span class="p">,</span> <span class="s1">&#39;Au&#39;</span><span class="p">,</span> <span class="s1">&#39;Ag&#39;</span><span class="p">,</span> <span class="s1">&#39;Pt&#39;</span><span class="p">,</span> <span class="s1">&#39;W&#39;</span><span class="p">,</span> <span class="s1">&#39;Ni&#39;</span><span class="p">,</span> <span class="s1">&#39;Ti&#39;</span><span class="p">,</span> <span class="s1">&#39;Pb&#39;</span><span class="p">,</span> <span class="s1">&#39;U&#39;</span><span class="p">]</span>
+
+<span class="c1"># Filter the DataFrame for the highly ductile elements</span>
+<span class="n">df_filtered</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;formula&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">highly_ductile_elements</span><span class="p">)]</span>
+
+<span class="c1"># Calculate the K/G ratio for the VRH case</span>
+<span class="n">df_filtered</span><span class="p">[</span><span class="s1">&#39;K_over_G_VRH&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_filtered</span><span class="p">[</span><span class="s1">&#39;K_VRH&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="n">df_filtered</span><span class="p">[</span><span class="s1">&#39;G_VRH&#39;</span><span class="p">]</span>
+
+<span class="c1"># Sort the DataFrame by K_over_G_VRH in ascending order</span>
+<span class="n">df_sorted</span> <span class="o">=</span> <span class="n">df_filtered</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s1">&#39;K_over_G_VRH&#39;</span><span class="p">)</span>
+
+<span class="c1"># Create a bar plot</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">df_sorted</span><span class="p">[</span><span class="s1">&#39;formula&#39;</span><span class="p">],</span> <span class="n">df_sorted</span><span class="p">[</span><span class="s1">&#39;K_over_G_VRH&#39;</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Element&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;K/G Ratio (VRH)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;K/G Ratios for Highly Ductile Elements (VRH)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">rotation</span><span class="o">=</span><span class="mi">45</span><span class="p">)</span>  <span class="c1"># Rotate x-axis labels for better readability</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_174/3797769300.py:8: SettingWithCopyWarning: 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+  df_filtered[&#39;K_over_G_VRH&#39;] = df_filtered[&#39;K_VRH&#39;] / df_filtered[&#39;G_VRH&#39;]
+</pre></div>
+</div>
+<img alt="../_images/d15f4a8875c2ee7904fee16ee3a0671311720b3a63813e64bae5e8252d62126a.png" src="../_images/d15f4a8875c2ee7904fee16ee3a0671311720b3a63813e64bae5e8252d62126a.png" />
+</div>
+</div>
+<p><strong>I get the following message:</strong> /var/folders/w8/7dt2svcn09ddsh718w9jv0n00000gq/T/ipykernel_45752/3797769300.py:8: SettingWithCopyWarning:
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead</p>
+<p>See the caveats in the documentation: <a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy">https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy</a>
+df_filtered[‘K_over_G_VRH’] = df_filtered[‘K_VRH’] / df_filtered[‘G_VRH’]</p>
+<p>To resolve the <code class="docutils literal notranslate"><span class="pre">SettingWithCopyWarning</span></code> in your Python code, you should ensure that <code class="docutils literal notranslate"><span class="pre">df_filtered</span></code> is explicitly a copy of the filtered data from the original DataFrame. This prevents pandas from treating <code class="docutils literal notranslate"><span class="pre">df_filtered</span></code> as a view, which can lead to unexpected behavior when modifying the data. Here’s how you can fix the warning:</p>
+<ol class="arabic">
+<li><p><strong>Use the <code class="docutils literal notranslate"><span class="pre">.copy()</span></code> Method:</strong>
+Modify the line where you filter the DataFrame to include <code class="docutils literal notranslate"><span class="pre">.copy()</span></code>, ensuring that <code class="docutils literal notranslate"><span class="pre">df_filtered</span></code> is a separate copy of the data.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Filter the DataFrame for the highly ductile elements and make a copy</span>
+<span class="n">df_filtered</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;structure_id&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">highly_ductile_elements</span><span class="p">)]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+</pre></div>
+</div>
+</li>
+<li><p><strong>Use <code class="docutils literal notranslate"><span class="pre">.loc</span></code> for Assignment:</strong>
+When adding the new column, use <code class="docutils literal notranslate"><span class="pre">.loc</span></code> to explicitly specify where to assign the values.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Calculate the K/G ratio for the VRH case using .loc</span>
+<span class="n">df_filtered</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="s1">&#39;K_over_G_VRH&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_filtered</span><span class="p">[</span><span class="s1">&#39;K_VRH&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="n">df_filtered</span><span class="p">[</span><span class="s1">&#39;G_VRH&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</li>
+</ol>
+<p>By implementing either of these changes, you eliminate the <code class="docutils literal notranslate"><span class="pre">SettingWithCopyWarning</span></code> and ensure that your DataFrame operations are clear and intentional.</p>
+<p><strong>Complete Updated Code:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
+<span class="c1"># Sample DataFrame creation (replace with your actual data loading)</span>
+<span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;G_Reuss&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">50</span><span class="p">,</span> <span class="mi">60</span><span class="p">,</span> <span class="mi">55</span><span class="p">,</span> <span class="mi">65</span><span class="p">,</span> <span class="mi">58</span><span class="p">,</span> <span class="mi">62</span><span class="p">,</span> <span class="mi">59</span><span class="p">,</span> <span class="mi">61</span><span class="p">,</span> <span class="mi">63</span><span class="p">,</span> <span class="mi">64</span><span class="p">],</span>
+    <span class="s1">&#39;G_VRH&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">52</span><span class="p">,</span> <span class="mi">61</span><span class="p">,</span> <span class="mi">57</span><span class="p">,</span> <span class="mi">66</span><span class="p">,</span> <span class="mi">59</span><span class="p">,</span> <span class="mi">63</span><span class="p">,</span> <span class="mi">60</span><span class="p">,</span> <span class="mi">62</span><span class="p">,</span> <span class="mi">64</span><span class="p">,</span> <span class="mi">65</span><span class="p">],</span>
+    <span class="s1">&#39;G_Voigt&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">53</span><span class="p">,</span> <span class="mi">62</span><span class="p">,</span> <span class="mi">58</span><span class="p">,</span> <span class="mi">67</span><span class="p">,</span> <span class="mi">60</span><span class="p">,</span> <span class="mi">64</span><span class="p">,</span> <span class="mi">61</span><span class="p">,</span> <span class="mi">63</span><span class="p">,</span> <span class="mi">65</span><span class="p">,</span> <span class="mi">66</span><span class="p">],</span>
+    <span class="s1">&#39;K_Reuss&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">100</span><span class="p">,</span> <span class="mi">110</span><span class="p">,</span> <span class="mi">105</span><span class="p">,</span> <span class="mi">115</span><span class="p">,</span> <span class="mi">108</span><span class="p">,</span> <span class="mi">112</span><span class="p">,</span> <span class="mi">107</span><span class="p">,</span> <span class="mi">111</span><span class="p">,</span> <span class="mi">113</span><span class="p">,</span> <span class="mi">114</span><span class="p">],</span>
+    <span class="s1">&#39;K_VRH&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">102</span><span class="p">,</span> <span class="mi">112</span><span class="p">,</span> <span class="mi">107</span><span class="p">,</span> <span class="mi">116</span><span class="p">,</span> <span class="mi">109</span><span class="p">,</span> <span class="mi">113</span><span class="p">,</span> <span class="mi">108</span><span class="p">,</span> <span class="mi">112</span><span class="p">,</span> <span class="mi">114</span><span class="p">,</span> <span class="mi">115</span><span class="p">],</span>
+    <span class="s1">&#39;K_Voigt&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">103</span><span class="p">,</span> <span class="mi">113</span><span class="p">,</span> <span class="mi">108</span><span class="p">,</span> <span class="mi">117</span><span class="p">,</span> <span class="mi">110</span><span class="p">,</span> <span class="mi">114</span><span class="p">,</span> <span class="mi">109</span><span class="p">,</span> <span class="mi">113</span><span class="p">,</span> <span class="mi">115</span><span class="p">,</span> <span class="mi">116</span><span class="p">],</span>
+    <span class="s1">&#39;structure_id&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Cu&#39;</span><span class="p">,</span> <span class="s1">&#39;Al&#39;</span><span class="p">,</span> <span class="s1">&#39;Au&#39;</span><span class="p">,</span> <span class="s1">&#39;Ag&#39;</span><span class="p">,</span> <span class="s1">&#39;Pt&#39;</span><span class="p">,</span> <span class="s1">&#39;W&#39;</span><span class="p">,</span> <span class="s1">&#39;Ni&#39;</span><span class="p">,</span> <span class="s1">&#39;Ti&#39;</span><span class="p">,</span> <span class="s1">&#39;Pb&#39;</span><span class="p">,</span> <span class="s1">&#39;U&#39;</span><span class="p">]</span>
+<span class="p">}</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+
+<span class="c1"># List of highly ductile elements</span>
+<span class="n">highly_ductile_elements</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Cu&#39;</span><span class="p">,</span> <span class="s1">&#39;Al&#39;</span><span class="p">,</span> <span class="s1">&#39;Au&#39;</span><span class="p">,</span> <span class="s1">&#39;Ag&#39;</span><span class="p">,</span> <span class="s1">&#39;Pt&#39;</span><span class="p">,</span> <span class="s1">&#39;W&#39;</span><span class="p">,</span> <span class="s1">&#39;Ni&#39;</span><span class="p">,</span> <span class="s1">&#39;Ti&#39;</span><span class="p">,</span> <span class="s1">&#39;Pb&#39;</span><span class="p">,</span> <span class="s1">&#39;U&#39;</span><span class="p">]</span>
+
+<span class="c1"># Filter the DataFrame for the highly ductile elements and make a copy</span>
+<span class="n">df_filtered</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;structure_id&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">highly_ductile_elements</span><span class="p">)]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+<span class="c1"># Calculate the K/G ratio for the VRH case</span>
+<span class="n">df_filtered</span><span class="p">[</span><span class="s1">&#39;K_over_G_VRH&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_filtered</span><span class="p">[</span><span class="s1">&#39;K_VRH&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="n">df_filtered</span><span class="p">[</span><span class="s1">&#39;G_VRH&#39;</span><span class="p">]</span>
+
+<span class="c1"># Sort the DataFrame by K_over_G_VRH in ascending order</span>
+<span class="n">df_sorted</span> <span class="o">=</span> <span class="n">df_filtered</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s1">&#39;K_over_G_VRH&#39;</span><span class="p">)</span>
+
+<span class="c1"># Create a bar plot</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">df_sorted</span><span class="p">[</span><span class="s1">&#39;structure_id&#39;</span><span class="p">],</span> <span class="n">df_sorted</span><span class="p">[</span><span class="s1">&#39;K_over_G_VRH&#39;</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Element&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;K/G Ratio (VRH)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;K/G Ratios for Highly Ductile Elements (VRH)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">rotation</span><span class="o">=</span><span class="mi">45</span><span class="p">)</span>  <span class="c1"># Rotate x-axis labels for better readability</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p><strong>Explanation:</strong></p>
+<ul class="simple">
+<li><p><strong>Using <code class="docutils literal notranslate"><span class="pre">.copy()</span></code>:</strong> By adding <code class="docutils literal notranslate"><span class="pre">.copy()</span></code> to the filtering operation, we ensure that <code class="docutils literal notranslate"><span class="pre">df_filtered</span></code> is a separate DataFrame, independent of the original <code class="docutils literal notranslate"><span class="pre">df</span></code>. This prevents the <code class="docutils literal notranslate"><span class="pre">SettingWithCopyWarning</span></code> because pandas knows that <code class="docutils literal notranslate"><span class="pre">df_filtered</span></code> is a distinct copy.</p></li>
+<li><p><strong>Using <code class="docutils literal notranslate"><span class="pre">.loc</span></code> for Assignment:</strong> The <code class="docutils literal notranslate"><span class="pre">.loc</span></code> indexer explicitly specifies the location for assigning the new column, making the code clearer and avoiding the warning.</p></li>
+</ul>
+<p>Both methods effectively resolve the warning, but using <code class="docutils literal notranslate"><span class="pre">.copy()</span></code> is more straightforward in this context as it clearly indicates that <code class="docutils literal notranslate"><span class="pre">df_filtered</span></code> is a copy of the original data. This approach enhances code readability and prevents unintended side effects when modifying the filtered DataFrame.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># List of highly ductile elements</span>
+<span class="n">highly_ductile_elements</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Cu&#39;</span><span class="p">,</span> <span class="s1">&#39;Al&#39;</span><span class="p">,</span> <span class="s1">&#39;Au&#39;</span><span class="p">,</span> <span class="s1">&#39;Ag&#39;</span><span class="p">,</span> <span class="s1">&#39;Pt&#39;</span><span class="p">,</span> <span class="s1">&#39;W&#39;</span><span class="p">,</span> <span class="s1">&#39;Ni&#39;</span><span class="p">,</span> <span class="s1">&#39;Ti&#39;</span><span class="p">,</span> <span class="s1">&#39;Pb&#39;</span><span class="p">,</span> <span class="s1">&#39;U&#39;</span><span class="p">]</span>
+
+<span class="c1"># Filter the DataFrame for the highly ductile elements and make a copy</span>
+<span class="n">df_filtered</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;formula&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">highly_ductile_elements</span><span class="p">)]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+<span class="c1"># Calculate the K/G ratio for the VRH case</span>
+<span class="n">df_filtered</span><span class="p">[</span><span class="s1">&#39;K_over_G_VRH&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_filtered</span><span class="p">[</span><span class="s1">&#39;K_VRH&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="n">df_filtered</span><span class="p">[</span><span class="s1">&#39;G_VRH&#39;</span><span class="p">]</span>
+
+<span class="c1"># Sort the DataFrame by K_over_G_VRH in ascending order</span>
+<span class="n">df_sorted</span> <span class="o">=</span> <span class="n">df_filtered</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s1">&#39;K_over_G_VRH&#39;</span><span class="p">)</span>
+
+<span class="c1"># Create a bar plot</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">df_sorted</span><span class="p">[</span><span class="s1">&#39;formula&#39;</span><span class="p">],</span> <span class="n">df_sorted</span><span class="p">[</span><span class="s1">&#39;K_over_G_VRH&#39;</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Element&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;K/G Ratio (VRH)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;K/G Ratios for Highly Ductile Elements (VRH)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">rotation</span><span class="o">=</span><span class="mi">45</span><span class="p">)</span>  <span class="c1"># Rotate x-axis labels for better readability</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/d15f4a8875c2ee7904fee16ee3a0671311720b3a63813e64bae5e8252d62126a.png" src="../_images/d15f4a8875c2ee7904fee16ee3a0671311720b3a63813e64bae5e8252d62126a.png" />
+</div>
+</div>
+<p>**add a dashed horizontal line marking the critical ratio of 1.75 in the plot **</p>
+<p>To add a dashed horizontal line marking the critical ( K/G ) ratio of 1.75 in the plot, you can use the <code class="docutils literal notranslate"><span class="pre">axhline</span></code> function from matplotlib. Here’s how to modify the plotting section of the code:</p>
+</section>
+<section id="modified-code">
+<h3>Modified Code:<a class="headerlink" href="#modified-code" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
+<span class="c1"># Sample DataFrame creation (replace with your actual data loading)</span>
+<span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;G_Reuss&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">50</span><span class="p">,</span> <span class="mi">60</span><span class="p">,</span> <span class="mi">55</span><span class="p">,</span> <span class="mi">65</span><span class="p">,</span> <span class="mi">58</span><span class="p">,</span> <span class="mi">62</span><span class="p">,</span> <span class="mi">59</span><span class="p">,</span> <span class="mi">61</span><span class="p">,</span> <span class="mi">63</span><span class="p">,</span> <span class="mi">64</span><span class="p">],</span>
+    <span class="s1">&#39;G_VRH&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">52</span><span class="p">,</span> <span class="mi">61</span><span class="p">,</span> <span class="mi">57</span><span class="p">,</span> <span class="mi">66</span><span class="p">,</span> <span class="mi">59</span><span class="p">,</span> <span class="mi">63</span><span class="p">,</span> <span class="mi">60</span><span class="p">,</span> <span class="mi">62</span><span class="p">,</span> <span class="mi">64</span><span class="p">,</span> <span class="mi">65</span><span class="p">],</span>
+    <span class="s1">&#39;G_Voigt&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">53</span><span class="p">,</span> <span class="mi">62</span><span class="p">,</span> <span class="mi">58</span><span class="p">,</span> <span class="mi">67</span><span class="p">,</span> <span class="mi">60</span><span class="p">,</span> <span class="mi">64</span><span class="p">,</span> <span class="mi">61</span><span class="p">,</span> <span class="mi">63</span><span class="p">,</span> <span class="mi">65</span><span class="p">,</span> <span class="mi">66</span><span class="p">],</span>
+    <span class="s1">&#39;K_Reuss&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">100</span><span class="p">,</span> <span class="mi">110</span><span class="p">,</span> <span class="mi">105</span><span class="p">,</span> <span class="mi">115</span><span class="p">,</span> <span class="mi">108</span><span class="p">,</span> <span class="mi">112</span><span class="p">,</span> <span class="mi">107</span><span class="p">,</span> <span class="mi">111</span><span class="p">,</span> <span class="mi">113</span><span class="p">,</span> <span class="mi">114</span><span class="p">],</span>
+    <span class="s1">&#39;K_VRH&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">102</span><span class="p">,</span> <span class="mi">112</span><span class="p">,</span> <span class="mi">107</span><span class="p">,</span> <span class="mi">116</span><span class="p">,</span> <span class="mi">109</span><span class="p">,</span> <span class="mi">113</span><span class="p">,</span> <span class="mi">108</span><span class="p">,</span> <span class="mi">112</span><span class="p">,</span> <span class="mi">114</span><span class="p">,</span> <span class="mi">115</span><span class="p">],</span>
+    <span class="s1">&#39;K_Voigt&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">103</span><span class="p">,</span> <span class="mi">113</span><span class="p">,</span> <span class="mi">108</span><span class="p">,</span> <span class="mi">117</span><span class="p">,</span> <span class="mi">110</span><span class="p">,</span> <span class="mi">114</span><span class="p">,</span> <span class="mi">109</span><span class="p">,</span> <span class="mi">113</span><span class="p">,</span> <span class="mi">115</span><span class="p">,</span> <span class="mi">116</span><span class="p">],</span>
+    <span class="s1">&#39;structure_id&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Cu&#39;</span><span class="p">,</span> <span class="s1">&#39;Al&#39;</span><span class="p">,</span> <span class="s1">&#39;Au&#39;</span><span class="p">,</span> <span class="s1">&#39;Ag&#39;</span><span class="p">,</span> <span class="s1">&#39;Pt&#39;</span><span class="p">,</span> <span class="s1">&#39;W&#39;</span><span class="p">,</span> <span class="s1">&#39;Ni&#39;</span><span class="p">,</span> <span class="s1">&#39;Ti&#39;</span><span class="p">,</span> <span class="s1">&#39;Pb&#39;</span><span class="p">,</span> <span class="s1">&#39;U&#39;</span><span class="p">]</span>
+<span class="p">}</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+
+<span class="c1"># List of highly ductile elements</span>
+<span class="n">highly_ductile_elements</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Cu&#39;</span><span class="p">,</span> <span class="s1">&#39;Al&#39;</span><span class="p">,</span> <span class="s1">&#39;Au&#39;</span><span class="p">,</span> <span class="s1">&#39;Ag&#39;</span><span class="p">,</span> <span class="s1">&#39;Pt&#39;</span><span class="p">,</span> <span class="s1">&#39;W&#39;</span><span class="p">,</span> <span class="s1">&#39;Ni&#39;</span><span class="p">,</span> <span class="s1">&#39;Ti&#39;</span><span class="p">,</span> <span class="s1">&#39;Pb&#39;</span><span class="p">,</span> <span class="s1">&#39;U&#39;</span><span class="p">]</span>
+
+<span class="c1"># Filter the DataFrame for the highly ductile elements and make a copy</span>
+<span class="n">df_filtered</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;structure_id&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">highly_ductile_elements</span><span class="p">)]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+<span class="c1"># Calculate the K/G ratio for the VRH case</span>
+<span class="n">df_filtered</span><span class="p">[</span><span class="s1">&#39;K_over_G_VRH&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_filtered</span><span class="p">[</span><span class="s1">&#39;K_VRH&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="n">df_filtered</span><span class="p">[</span><span class="s1">&#39;G_VRH&#39;</span><span class="p">]</span>
+
+<span class="c1"># Sort the DataFrame by K_over_G_VRH in ascending order</span>
+<span class="n">df_sorted</span> <span class="o">=</span> <span class="n">df_filtered</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s1">&#39;K_over_G_VRH&#39;</span><span class="p">)</span>
+
+<span class="c1"># Create a bar plot</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">bars</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">df_sorted</span><span class="p">[</span><span class="s1">&#39;structure_id&#39;</span><span class="p">],</span> <span class="n">df_sorted</span><span class="p">[</span><span class="s1">&#39;K_over_G_VRH&#39;</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Element&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;K/G Ratio (VRH)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;K/G Ratios for Highly Ductile Elements (VRH)&#39;</span><span class="p">)</span>
+
+<span class="c1"># Add a dashed horizontal line at K/G = 1.75</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="mf">1.75</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;dashed&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Critical K/G Ratio (1.75)&#39;</span><span class="p">)</span>
+
+<span class="c1"># Adjust y-axis limits to ensure the line is visible</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="nb">min</span><span class="p">(</span><span class="n">df_sorted</span><span class="p">[</span><span class="s1">&#39;K_over_G_VRH&#39;</span><span class="p">])</span> <span class="o">-</span> <span class="mf">0.1</span><span class="p">,</span> <span class="nb">max</span><span class="p">(</span><span class="n">df_sorted</span><span class="p">[</span><span class="s1">&#39;K_over_G_VRH&#39;</span><span class="p">])</span> <span class="o">+</span> <span class="mf">0.1</span><span class="p">)</span>
+
+<span class="c1"># Rotate x-axis labels for better readability</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">rotation</span><span class="o">=</span><span class="mi">45</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+
+<span class="c1"># Add legend</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+
+<span class="c1"># Show the plot</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+<section id="explanation-of-changes">
+<h3>Explanation of Changes:<a class="headerlink" href="#explanation-of-changes" title="Link to this heading">#</a></h3>
+<ol class="arabic simple">
+<li><p><strong>Added <code class="docutils literal notranslate"><span class="pre">plt.axhline</span></code> Call:</strong></p>
+<ul class="simple">
+<li><p>The <code class="docutils literal notranslate"><span class="pre">plt.axhline</span></code> function is used to draw a horizontal line across the plot.</p></li>
+<li><p>Parameters:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">y=1.75</span></code>: Specifies the y-coordinate for the horizontal line.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">color='red'</span></code>: Sets the color of the line to red for visibility.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">linestyle='dashed'</span></code>: Makes the line dashed.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">linewidth=2</span></code>: Increases the thickness of the line for better visibility.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">label='Critical</span> <span class="pre">K/G</span> <span class="pre">Ratio</span> <span class="pre">(1.75)'</span></code>: Adds a label to the line for clarity.</p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>Adjusted Y-Axis Limits:</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">plt.ylim</span></code> is used to ensure the horizontal line is fully visible within the plot.</p></li>
+<li><p>The limits are set to slightly below the minimum and above the maximum K/G ratios in the data.</p></li>
+</ul>
+</li>
+<li><p><strong>Added Legend:</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">plt.legend()</span></code> is called to display the label of the horizontal line.</p></li>
+</ul>
+</li>
+</ol>
+<p>This modification adds a dashed horizontal line at ( K/G = 1.75 ) to the plot, clearly marking</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># List of highly ductile elements</span>
+<span class="n">highly_ductile_elements</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Cu&#39;</span><span class="p">,</span> <span class="s1">&#39;Al&#39;</span><span class="p">,</span> <span class="s1">&#39;Au&#39;</span><span class="p">,</span> <span class="s1">&#39;Ag&#39;</span><span class="p">,</span> <span class="s1">&#39;Pt&#39;</span><span class="p">,</span> <span class="s1">&#39;W&#39;</span><span class="p">,</span> <span class="s1">&#39;Ni&#39;</span><span class="p">,</span> <span class="s1">&#39;Ti&#39;</span><span class="p">,</span> <span class="s1">&#39;Pb&#39;</span><span class="p">,</span> <span class="s1">&#39;U&#39;</span><span class="p">]</span>
+
+<span class="c1"># Filter the DataFrame for the highly ductile elements and make a copy</span>
+<span class="n">df_filtered</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;formula&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">highly_ductile_elements</span><span class="p">)]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+<span class="c1"># Calculate the K/G ratio for the VRH case</span>
+<span class="n">df_filtered</span><span class="p">[</span><span class="s1">&#39;K_over_G_VRH&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_filtered</span><span class="p">[</span><span class="s1">&#39;K_VRH&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="n">df_filtered</span><span class="p">[</span><span class="s1">&#39;G_VRH&#39;</span><span class="p">]</span>
+
+<span class="c1"># Sort the DataFrame by K_over_G_VRH in ascending order</span>
+<span class="n">df_sorted</span> <span class="o">=</span> <span class="n">df_filtered</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s1">&#39;K_over_G_VRH&#39;</span><span class="p">)</span>
+
+<span class="c1"># Create a bar plot</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">bars</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">df_sorted</span><span class="p">[</span><span class="s1">&#39;formula&#39;</span><span class="p">],</span> <span class="n">df_sorted</span><span class="p">[</span><span class="s1">&#39;K_over_G_VRH&#39;</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Element&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;K/G Ratio (VRH)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;K/G Ratios for Highly Ductile Elements (VRH)&#39;</span><span class="p">)</span>
+
+<span class="c1"># Add a dashed horizontal line at K/G = 1.75</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="mf">1.75</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;dashed&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Critical K/G Ratio (1.75)&#39;</span><span class="p">)</span>
+
+<span class="c1"># Adjust y-axis limits to ensure the line is visible</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="nb">min</span><span class="p">(</span><span class="n">df_sorted</span><span class="p">[</span><span class="s1">&#39;K_over_G_VRH&#39;</span><span class="p">])</span> <span class="o">-</span> <span class="mf">0.5</span><span class="p">,</span> <span class="nb">max</span><span class="p">(</span><span class="n">df_sorted</span><span class="p">[</span><span class="s1">&#39;K_over_G_VRH&#39;</span><span class="p">])</span> <span class="o">+</span> <span class="mf">0.5</span><span class="p">)</span>
+
+<span class="c1"># Rotate x-axis labels for better readability</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">rotation</span><span class="o">=</span><span class="mi">45</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+
+<span class="c1"># Add legend</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+
+<span class="c1"># Show the plot</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/6b3c9d5e1b8805186be0c34acc9fc3db6de1e03c183b09a81b886ec76aa7e159.png" src="../_images/6b3c9d5e1b8805186be0c34acc9fc3db6de1e03c183b09a81b886ec76aa7e159.png" />
+</div>
+</div>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./1_joerg_neugebauer"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#find-a-suitable-dataset">Find a suitable dataset</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comprehensive-databases-for-elastic-constants">Comprehensive Databases for Elastic Constants</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary-table">Summary Table</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-access">How to Access</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-following-chat-is-created-using-deepseek-r1-distill-llama-70b">The following chat is created using DeepSeek R1 Distill Llama 70B</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#explanation">Explanation:</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pretty-print-the-json-data">1. <strong>Pretty Print the JSON Data</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#use-the-pprint-module">2. <strong>Use the <code class="docutils literal notranslate"><span class="pre">pprint</span></code> Module</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#convert-json-to-a-pandas-dataframe">3. <strong>Convert JSON to a Pandas DataFrame</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#recursive-visualization-of-nested-data">4. <strong>Recursive Visualization of Nested Data</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interactive-visualization-with-plotly">5. <strong>Interactive Visualization with Plotly</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#use-a-json-viewer-in-jupyter-notebook">6. <strong>Use a JSON Viewer in Jupyter Notebook</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#understanding-the-k-g-ratio">1. <strong>Understanding the ( K/G ) Ratio</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ductility-and-brittleness">2. <strong>Ductility and Brittleness</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#theoretical-background">3. <strong>Theoretical Background</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#empirical-observations">4. <strong>Empirical Observations</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mechanistic-interpretation">5. <strong>Mechanistic Interpretation</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#limitations-and-caveats">6. <strong>Limitations and Caveats</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#practical-implications">7. <strong>Practical Implications</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion">Conclusion</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-calculate-the-k-g-ratio-for-the-vrh-case">Step 1: Calculate the K/G Ratio for the VRH Case</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-handle-division-by-zero">Step 2: Handle Division by Zero</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-sort-the-dataframe-by-k-g-ratio">Step 3: Sort the DataFrame by K/G Ratio</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-4-select-the-first-n-data-points">Step 4: Select the First n Data Points</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-5-create-a-bar-plot">Step 5: Create a Bar Plot</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#complete-code-example">Complete Code Example</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Explanation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-create-a-list-of-highly-ductile-elements">Step 1: Create a List of Highly Ductile Elements</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-filter-the-dataframe-for-these-elements">Step 2: Filter the DataFrame for These Elements</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-calculate-the-k-g-ratio-for-the-vrh-case">Step 3: Calculate the K/G Ratio for the VRH Case</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-4-sort-the-dataframe-by-k-g-ratio">Step 4: Sort the DataFrame by K/G Ratio</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-5-plot-the-k-g-ratios">Step 5: Plot the K/G Ratios</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-6-verify-element-symbols">Step 6: Verify Element Symbols</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Complete Code Example</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Explanation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#modified-code">Modified Code:</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#explanation-of-changes">Explanation of Changes:</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Jan Janssen
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

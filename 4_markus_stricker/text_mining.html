@@ -1,0 +1,858 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>A primer in text mining &#8212; SusMet Machine Learning Workshop</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '4_markus_stricker/text_mining';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../3_jan_janssen/experiment_llama_31_v2.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">SusMet Machine Learning Workshop</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../3_jan_janssen/experiment_llama_31_v2.html">
+                    Adaptive sampling for high resistance materials
+                </a>
+            </li>
+        </ul>
+        
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://mybinder.org/v2/gh/jan-janssen/susmet-ml-workshop/master?urlpath=lab/tree/4_markus_stricker/text_mining.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Binder"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Binder logo" src="../_static/images/logo_binder.svg">
+  </span>
+<span class="btn__text-container">Binder</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/4_markus_stricker/text_mining.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>A primer in text mining</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#text-preparation-tokenization-stopword-deletion">Text preparation: Tokenization &amp; stopword-deletion</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bag-of-words-from-scratch">Bag of Words from Scratch</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-preprocessing-of-text-data">Step 1: Preprocessing of text data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-vocabulary">Step 2: Vocabulary</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-calculate-word-frequency-and-vectorization">Step 3: Calculate word frequency and vectorization</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#alternative-scikit-learn-countvectorizer">Alternative: Scikit-learn <code class="docutils literal notranslate"><span class="pre">CountVectorizer</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tf-idf-extension-of-bag-of-words">TF-IDF: Extension of Bag of Words</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#word2vec-alice-in-wonderland">Word2Vec: Alice in Wonderland</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="a-primer-in-text-mining">
+<h1>A primer in text mining<a class="headerlink" href="#a-primer-in-text-mining" title="Link to this heading">#</a></h1>
+<p>Lehrende: <a class="reference external" href="mailto:markus&#46;stricker&#37;&#52;&#48;rub&#46;de">Markus Stricker</a></p>
+<p>Inspired by <a class="reference external" href="https://www.datacamp.com/tutorial/python-bag-of-words-model">datacamp ‘Python Bag of Words Models: A Complete Guide’</a></p>
+<section id="text-preparation-tokenization-stopword-deletion">
+<h2>Text preparation: Tokenization &amp; stopword-deletion<a class="headerlink" href="#text-preparation-tokenization-stopword-deletion" title="Link to this heading">#</a></h2>
+<p><em>Stopwords</em> are frequently occuring word without inherent meaning. They are usually deleted after tokenization.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">nltk</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">nltk.corpus</span><span class="w"> </span><span class="kn">import</span> <span class="n">stopwords</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">nltk.tokenize</span><span class="w"> </span><span class="kn">import</span> <span class="n">word_tokenize</span>
+
+<span class="c1"># Download der Standardlisten (muss explizit erfolgen)</span>
+<span class="n">nltk</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="s1">&#39;punkt_tab&#39;</span><span class="p">)</span> <span class="c1"># Interpunktion</span>
+<span class="n">nltk</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="s1">&#39;stopwords&#39;</span><span class="p">)</span> <span class="c1"># Stopwords</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[nltk_data] Downloading package punkt_tab to /home/jovyan/nltk_data...
+[nltk_data]   Unzipping tokenizers/punkt_tab.zip.
+[nltk_data] Downloading package stopwords to /home/jovyan/nltk_data...
+[nltk_data]   Unzipping corpora/stopwords.zip.
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>True
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sentence</span> <span class="o">=</span> <span class="s2">&quot;This is an example showing how to remove stop words from a sentence.&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">words</span> <span class="o">=</span> <span class="n">word_tokenize</span><span class="p">(</span><span class="n">sentence</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">words</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;This&#39;, &#39;is&#39;, &#39;an&#39;, &#39;example&#39;, &#39;showing&#39;, &#39;how&#39;, &#39;to&#39;, &#39;remove&#39;, &#39;stop&#39;, &#39;words&#39;, &#39;from&#39;, &#39;a&#39;, &#39;sentence&#39;, &#39;.&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">stop_words</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">stopwords</span><span class="o">.</span><span class="n">words</span><span class="p">(</span><span class="s2">&quot;english&quot;</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">stop_words</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;too&#39;, &quot;hadn&#39;t&quot;, &#39;any&#39;, &#39;not&#39;, &#39;did&#39;, &#39;was&#39;, &#39;there&#39;, &quot;he&#39;d&quot;, &#39;don&#39;, &#39;ours&#39;, &#39;than&#39;, &#39;they&#39;, &#39;am&#39;, &quot;we&#39;d&quot;, &#39;a&#39;, &quot;mightn&#39;t&quot;, &#39;hasn&#39;, &#39;to&#39;, &#39;couldn&#39;, &quot;they&#39;ll&quot;, &#39;at&#39;, &#39;only&#39;, &#39;them&#39;, &quot;it&#39;s&quot;, &#39;or&#39;, &#39;under&#39;, &quot;shan&#39;t&quot;, &#39;me&#39;, &#39;hadn&#39;, &#39;as&#39;, &quot;it&#39;ll&quot;, &#39;during&#39;, &#39;but&#39;, &#39;why&#39;, &#39;you&#39;, &quot;shouldn&#39;t&quot;, &#39;because&#39;, &#39;between&#39;, &#39;same&#39;, &#39;off&#39;, &quot;they&#39;ve&quot;, &#39;have&#39;, &#39;were&#39;, &#39;more&#39;, &#39;d&#39;, &#39;after&#39;, &#39;so&#39;, &#39;wouldn&#39;, &#39;aren&#39;, &quot;it&#39;d&quot;, &quot;didn&#39;t&quot;, &#39;other&#39;, &#39;themselves&#39;, &#39;now&#39;, &#39;won&#39;, &#39;no&#39;, &#39;having&#39;, &#39;below&#39;, &#39;that&#39;, &quot;she&#39;ll&quot;, &quot;that&#39;ll&quot;, &#39;the&#39;, &quot;we&#39;ve&quot;, &#39;just&#39;, &#39;with&#39;, &#39;our&#39;, &#39;this&#39;, &quot;wasn&#39;t&quot;, &#39;some&#39;, &#39;shouldn&#39;, &#39;weren&#39;, &#39;ma&#39;, &#39;against&#39;, &#39;do&#39;, &quot;he&#39;ll&quot;, &#39;into&#39;, &#39;before&#39;, &#39;he&#39;, &#39;himself&#39;, &#39;ourselves&#39;, &quot;they&#39;d&quot;, &#39;your&#39;, &#39;by&#39;, &#39;through&#39;, &#39;most&#39;, &#39;re&#39;, &#39;mustn&#39;, &#39;it&#39;, &#39;isn&#39;, &#39;my&#39;, &#39;from&#39;, &quot;you&#39;ll&quot;, &quot;you&#39;re&quot;, &#39;on&#39;, &#39;own&#39;, &#39;yours&#39;, &#39;t&#39;, &#39;has&#39;, &quot;wouldn&#39;t&quot;, &#39;and&#39;, &#39;theirs&#39;, &#39;yourself&#39;, &#39;does&#39;, &#39;those&#39;, &#39;where&#39;, &#39;itself&#39;, &#39;wasn&#39;, &#39;mightn&#39;, &quot;isn&#39;t&quot;, &quot;i&#39;ve&quot;, &quot;they&#39;re&quot;, &#39;being&#39;, &#39;didn&#39;, &#39;nor&#39;, &#39;been&#39;, &quot;don&#39;t&quot;, &#39;ain&#39;, &#39;myself&#39;, &#39;these&#39;, &#39;about&#39;, &quot;haven&#39;t&quot;, &#39;above&#39;, &#39;be&#39;, &#39;few&#39;, &#39;over&#39;, &#39;again&#39;, &#39;an&#39;, &quot;you&#39;ve&quot;, &#39;she&#39;, &#39;when&#39;, &quot;she&#39;d&quot;, &#39;i&#39;, &#39;once&#39;, &#39;o&#39;, &#39;s&#39;, &#39;whom&#39;, &#39;while&#39;, &quot;should&#39;ve&quot;, &#39;how&#39;, &quot;i&#39;m&quot;, &#39;their&#39;, &#39;y&#39;, &quot;couldn&#39;t&quot;, &#39;will&#39;, &#39;down&#39;, &quot;weren&#39;t&quot;, &#39;who&#39;, &#39;we&#39;, &#39;should&#39;, &quot;won&#39;t&quot;, &#39;ve&#39;, &#39;each&#39;, &#39;very&#39;, &#39;is&#39;, &#39;both&#39;, &#39;further&#39;, &#39;of&#39;, &quot;we&#39;ll&quot;, &#39;for&#39;, &quot;needn&#39;t&quot;, &quot;you&#39;d&quot;, &#39;which&#39;, &#39;doing&#39;, &#39;up&#39;, &quot;doesn&#39;t&quot;, &#39;needn&#39;, &#39;then&#39;, &#39;haven&#39;, &#39;are&#39;, &#39;her&#39;, &#39;if&#39;, &quot;i&#39;ll&quot;, &#39;his&#39;, &#39;yourselves&#39;, &#39;all&#39;, &#39;ll&#39;, &#39;m&#39;, &#39;can&#39;, &#39;him&#39;, &#39;out&#39;, &#39;in&#39;, &quot;hasn&#39;t&quot;, &quot;he&#39;s&quot;, &#39;herself&#39;, &#39;its&#39;, &#39;what&#39;, &quot;i&#39;d&quot;, &quot;aren&#39;t&quot;, &quot;she&#39;s&quot;, &#39;doesn&#39;, &#39;had&#39;, &#39;hers&#39;, &#39;until&#39;, &quot;we&#39;re&quot;, &#39;shan&#39;, &#39;such&#39;, &quot;mustn&#39;t&quot;, &#39;here&#39;}
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">filtered_sentence</span> <span class="o">=</span> <span class="p">[</span><span class="n">word</span> <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">words</span> <span class="k">if</span> <span class="n">word</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">stop_words</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">filtered_sentence</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;example&#39;, &#39;showing&#39;, &#39;remove&#39;, &#39;stop&#39;, &#39;words&#39;, &#39;sentence&#39;, &#39;.&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">re</span>  
+<span class="c1"># Import the regular expressions module to help with text processing</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">collections</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">defaultdict</span><span class="p">,</span>
+<span class="p">)</span>  
+
+<span class="c1"># Import defaultdict to easily handle word frequency counting</span>
+
+<span class="c1"># Sample corpus of text - a small dataset of sentences to analyze</span>
+<span class="n">corpus</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">&quot;Tokenization is the process of breaking text into words.&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Vocabulary is the collection of unique words.&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;The process of tokenizing is essential in NLP.&quot;</span><span class="p">,</span>
+<span class="p">]</span>
+
+<span class="c1"># Initialize a defaultdict with integer values to store word frequencies</span>
+
+<span class="c1"># defaultdict(int) initializes each new key with a default integer value of 0</span>
+<span class="n">vocab</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+
+<span class="c1"># Loop through each sentence in the corpus to tokenize and normalize</span>
+<span class="k">for</span> <span class="n">sentence</span> <span class="ow">in</span> <span class="n">corpus</span><span class="p">:</span>
+    <span class="c1"># Convert the sentence to lowercase to ensure consistency in counting (e.g., &#39;Tokenization&#39; and &#39;tokenization&#39; are treated as the same word)</span>
+    <span class="c1"># Use regular expressions to find words composed of alphanumeric characters only</span>
+    <span class="n">words</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\b\w+\b&quot;</span><span class="p">,</span> <span class="n">sentence</span><span class="o">.</span><span class="n">lower</span><span class="p">())</span>
+    <span class="c1"># For each word found, increment its count in the vocab dictionary</span>
+    <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">words</span><span class="p">:</span>
+        <span class="n">vocab</span><span class="p">[</span><span class="n">word</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+
+<span class="c1"># Convert the defaultdict vocab to a regular dictionary for easier handling and sorting</span>
+
+<span class="c1"># Sort the dictionary by word frequency in descending order and convert it to a new dictionary</span>
+<span class="n">sorted_vocab</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">vocab</span><span class="o">.</span><span class="n">items</span><span class="p">(),</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
+
+<span class="c1"># Display the sorted vocabulary with each word and its frequency count</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Vocabulary with frequencies:&quot;</span><span class="p">,</span> <span class="n">sorted_vocab</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Vocabulary with frequencies: {&#39;is&#39;: 3, &#39;the&#39;: 3, &#39;of&#39;: 3, &#39;process&#39;: 2, &#39;words&#39;: 2, &#39;tokenization&#39;: 1, &#39;breaking&#39;: 1, &#39;text&#39;: 1, &#39;into&#39;: 1, &#39;vocabulary&#39;: 1, &#39;collection&#39;: 1, &#39;unique&#39;: 1, &#39;tokenizing&#39;: 1, &#39;essential&#39;: 1, &#39;in&#39;: 1, &#39;nlp&#39;: 1}
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="bag-of-words-from-scratch">
+<h2>Bag of Words from Scratch<a class="headerlink" href="#bag-of-words-from-scratch" title="Link to this heading">#</a></h2>
+</section>
+<section id="step-1-preprocessing-of-text-data">
+<h2>Step 1: Preprocessing of text data<a class="headerlink" href="#step-1-preprocessing-of-text-data" title="Link to this heading">#</a></h2>
+<p>We define a simple function to process the text including tokenization, lowercasing, and deleation of puncuation.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">collections</span><span class="w"> </span><span class="kn">import</span> <span class="n">defaultdict</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">string</span>
+
+<span class="c1"># Sample text data: sentences</span>
+<span class="n">corpus</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">&quot;Python is amazing and fun.&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Python is not just fun but also powerful.&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Learning Python is fun!&quot;</span><span class="p">,</span>
+<span class="p">]</span>
+<span class="c1"># Function to preprocess text</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">preprocess</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
+    <span class="c1"># Convert to lowercase</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="n">text</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+    <span class="c1"># Remove punctuation</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="n">text</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span><span class="nb">str</span><span class="o">.</span><span class="n">maketrans</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">string</span><span class="o">.</span><span class="n">punctuation</span><span class="p">))</span>
+    <span class="c1"># Tokenize: split the text into words</span>
+    <span class="n">tokens</span> <span class="o">=</span> <span class="n">text</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">tokens</span>
+
+<span class="c1"># Apply preprocessing to the sample corpus</span>
+<span class="n">processed_corpus</span> <span class="o">=</span> <span class="p">[</span><span class="n">preprocess</span><span class="p">(</span><span class="n">sentence</span><span class="p">)</span> <span class="k">for</span> <span class="n">sentence</span> <span class="ow">in</span> <span class="n">corpus</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">processed_corpus</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[&#39;python&#39;, &#39;is&#39;, &#39;amazing&#39;, &#39;and&#39;, &#39;fun&#39;], [&#39;python&#39;, &#39;is&#39;, &#39;not&#39;, &#39;just&#39;, &#39;fun&#39;, &#39;but&#39;, &#39;also&#39;, &#39;powerful&#39;], [&#39;learning&#39;, &#39;python&#39;, &#39;is&#39;, &#39;fun&#39;]]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="step-2-vocabulary">
+<h2>Step 2: Vocabulary<a class="headerlink" href="#step-2-vocabulary" title="Link to this heading">#</a></h2>
+<p>Scan the text and build a list of uniquely-occuring words.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Initialize an empty set for the vocabulary</span>
+<span class="n">vocabulary</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+
+<span class="c1"># Build the vocabulary</span>
+<span class="k">for</span> <span class="n">sentence</span> <span class="ow">in</span> <span class="n">processed_corpus</span><span class="p">:</span>
+    <span class="n">vocabulary</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">sentence</span><span class="p">)</span>
+
+<span class="c1"># Convert to a sorted list</span>
+<span class="n">vocabulary</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">vocabulary</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Vocabulary:&quot;</span><span class="p">,</span> <span class="n">vocabulary</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Vocabulary: [&#39;also&#39;, &#39;amazing&#39;, &#39;and&#39;, &#39;but&#39;, &#39;fun&#39;, &#39;is&#39;, &#39;just&#39;, &#39;learning&#39;, &#39;not&#39;, &#39;powerful&#39;, &#39;python&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="step-3-calculate-word-frequency-and-vectorization">
+<h2>Step 3: Calculate word frequency and vectorization<a class="headerlink" href="#step-3-calculate-word-frequency-and-vectorization" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">create_bow_vector</span><span class="p">(</span><span class="n">sentence</span><span class="p">,</span> <span class="n">vocab</span><span class="p">):</span>
+    <span class="n">vector</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">vocab</span><span class="p">)</span>  <span class="c1"># Initialize a vector of zeros</span>
+    <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">sentence</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">vocab</span><span class="p">:</span>
+            <span class="n">idx</span> <span class="o">=</span> <span class="n">vocab</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">word</span><span class="p">)</span>  <span class="c1"># Find the index of the word in the vocabulary</span>
+            <span class="n">vector</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>  <span class="c1"># Increment the count at that index</span>
+    <span class="k">return</span> <span class="n">vector</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create BoW vector for each sentence in the processed corpus</span>
+<span class="n">bow_vectors</span> <span class="o">=</span> <span class="p">[</span><span class="n">create_bow_vector</span><span class="p">(</span><span class="n">sentence</span><span class="p">,</span> <span class="n">vocabulary</span><span class="p">)</span> <span class="k">for</span> <span class="n">sentence</span> <span class="ow">in</span> <span class="n">processed_corpus</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Bag of Words vectors:&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">vector</span> <span class="ow">in</span> <span class="n">bow_vectors</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">vector</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Bag of Words vectors:
+[0, 1, 1, 0, 1, 1, 0, 0, 0, 0, 1]
+[1, 0, 0, 1, 1, 1, 1, 0, 1, 1, 1]
+[0, 0, 0, 0, 1, 1, 0, 1, 0, 0, 1]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="alternative-scikit-learn-countvectorizer">
+<h2>Alternative: Scikit-learn <code class="docutils literal notranslate"><span class="pre">CountVectorizer</span></code><a class="headerlink" href="#alternative-scikit-learn-countvectorizer" title="Link to this heading">#</a></h2>
+<p>Manual creation is good for understanding but <code class="docutils literal notranslate"><span class="pre">scikit-lean</span></code> provides efficient, optimized implementations.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.feature_extraction.text</span><span class="w"> </span><span class="kn">import</span> <span class="n">CountVectorizer</span>
+<span class="c1"># Original corpus</span>
+<span class="n">corpus</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">&quot;Python is amazing and fun.&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Python is not just fun but also powerful.&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Learning Python is fun!&quot;</span><span class="p">,</span>
+<span class="p">]</span>
+<span class="c1"># Create a CountVectorizer Object</span>
+<span class="n">vectorizer</span> <span class="o">=</span> <span class="n">CountVectorizer</span><span class="p">()</span>
+<span class="c1"># Fit and transform the corpus</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">vectorizer</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">corpus</span><span class="p">)</span>
+<span class="c1"># Print the generated vocabulary</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Vocabulary:&quot;</span><span class="p">,</span> <span class="n">vectorizer</span><span class="o">.</span><span class="n">get_feature_names_out</span><span class="p">())</span>
+<span class="c1"># Print the Bag-of-Words matrix</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;BoW representation:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">toarray</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Vocabulary: [&#39;also&#39; &#39;amazing&#39; &#39;and&#39; &#39;but&#39; &#39;fun&#39; &#39;is&#39; &#39;just&#39; &#39;learning&#39; &#39;not&#39;
+ &#39;powerful&#39; &#39;python&#39;]
+BoW representation:
+[[0 1 1 0 1 1 0 0 0 0 1]
+ [1 0 0 1 1 1 1 0 1 1 1]
+ [0 0 0 0 1 1 0 1 0 0 1]]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="tf-idf-extension-of-bag-of-words">
+<h2>TF-IDF: Extension of Bag of Words<a class="headerlink" href="#tf-idf-extension-of-bag-of-words" title="Link to this heading">#</a></h2>
+<p>Term Frequency (TF) represents the frequency in a document. Inverse Document Frequency (IDF) reduced the influence of a word across many documents. The TF-IDF metric is calculated by multiplication.</p>
+<p>We use <code class="docutils literal notranslate"><span class="pre">scikit-learn</span></code>’s <code class="docutils literal notranslate"><span class="pre">TfidfVectorizer</span></code> function.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.feature_extraction.text</span><span class="w"> </span><span class="kn">import</span> <span class="n">TfidfVectorizer</span>
+<span class="c1"># Sample corpus</span>
+<span class="n">corpus</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">&quot;Python is amazing and fun.&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Python is not just fun but also powerful.&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Learning Python is fun!&quot;</span><span class="p">,</span>
+<span class="p">]</span>
+
+<span class="c1"># Create the Tf-idf vectorizer</span>
+<span class="n">tfidf_vectorizer</span> <span class="o">=</span> <span class="n">TfidfVectorizer</span><span class="p">()</span>
+
+<span class="c1"># Fit and transform the corpus</span>
+<span class="n">X_tfidf</span> <span class="o">=</span> <span class="n">tfidf_vectorizer</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">corpus</span><span class="p">)</span>
+
+<span class="c1"># Show the Vocabulary</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Vocabulary:&quot;</span><span class="p">,</span> <span class="n">tfidf_vectorizer</span><span class="o">.</span><span class="n">get_feature_names_out</span><span class="p">())</span>
+
+<span class="c1"># Show the TF-IDF Matrix</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;TF-IDF Representation:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">X_tfidf</span><span class="o">.</span><span class="n">toarray</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Vocabulary: [&#39;also&#39; &#39;amazing&#39; &#39;and&#39; &#39;but&#39; &#39;fun&#39; &#39;is&#39; &#39;just&#39; &#39;learning&#39; &#39;not&#39;
+ &#39;powerful&#39; &#39;python&#39;]
+TF-IDF Representation:
+[[0.         0.57292883 0.57292883 0.         0.338381   0.338381
+  0.         0.         0.         0.         0.338381  ]
+ [0.40667606 0.         0.         0.40667606 0.24018943 0.24018943
+  0.40667606 0.         0.40667606 0.40667606 0.24018943]
+ [0.         0.         0.         0.         0.41285857 0.41285857
+  0.         0.69903033 0.         0.         0.41285857]]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="word2vec-alice-in-wonderland">
+<h2>Word2Vec: Alice in Wonderland<a class="headerlink" href="#word2vec-alice-in-wonderland" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># importing all necessary modules</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">gensim.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">Word2Vec</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">gensim</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">nltk.tokenize</span><span class="w"> </span><span class="kn">import</span> <span class="n">sent_tokenize</span><span class="p">,</span> <span class="n">word_tokenize</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">warnings</span>
+ 
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="n">action</span><span class="o">=</span><span class="s1">&#39;ignore&#39;</span><span class="p">)</span>
+ 
+ 
+<span class="c1">#  Reads ‘alice.txt’ file</span>
+<span class="n">sample</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;alice_in_wonderland.txt&quot;</span><span class="p">)</span>
+<span class="n">s</span> <span class="o">=</span> <span class="n">sample</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+ 
+<span class="c1"># Replaces escape character with space</span>
+<span class="n">f</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="s2">&quot; &quot;</span><span class="p">)</span>
+ 
+<span class="n">data</span> <span class="o">=</span> <span class="p">[]</span>
+ 
+<span class="c1"># iterate through each sentence in the file</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">sent_tokenize</span><span class="p">(</span><span class="n">f</span><span class="p">):</span>
+    <span class="n">temp</span> <span class="o">=</span> <span class="p">[]</span>
+ 
+    <span class="c1"># tokenize the sentence into words</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">word_tokenize</span><span class="p">(</span><span class="n">i</span><span class="p">):</span>
+        <span class="n">temp</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">j</span><span class="o">.</span><span class="n">lower</span><span class="p">())</span>
+ 
+    <span class="n">data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">temp</span><span class="p">)</span>
+ 
+<span class="c1"># Create CBOW model</span>
+<span class="n">model1</span> <span class="o">=</span> <span class="n">gensim</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">Word2Vec</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">min_count</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+                                <span class="n">vector_size</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">window</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+ 
+<span class="c1"># Print results</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Cosine similarity between &#39;alice&#39; &quot;</span> <span class="o">+</span>
+      <span class="s2">&quot;and &#39;wonderland&#39; - CBOW : &quot;</span><span class="p">,</span>
+      <span class="n">model1</span><span class="o">.</span><span class="n">wv</span><span class="o">.</span><span class="n">similarity</span><span class="p">(</span><span class="s1">&#39;alice&#39;</span><span class="p">,</span> <span class="s1">&#39;wonderland&#39;</span><span class="p">))</span>
+ 
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Cosine similarity between &#39;alice&#39; &quot;</span> <span class="o">+</span>
+      <span class="s2">&quot;and &#39;machines&#39; - CBOW : &quot;</span><span class="p">,</span>
+      <span class="n">model1</span><span class="o">.</span><span class="n">wv</span><span class="o">.</span><span class="n">similarity</span><span class="p">(</span><span class="s1">&#39;alice&#39;</span><span class="p">,</span> <span class="s1">&#39;machines&#39;</span><span class="p">))</span>
+ 
+<span class="c1"># Create Skip Gram model</span>
+<span class="n">model2</span> <span class="o">=</span> <span class="n">gensim</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">Word2Vec</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">min_count</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">vector_size</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
+                                <span class="n">window</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">sg</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+ 
+<span class="c1"># Print results</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Cosine similarity between &#39;alice&#39; &quot;</span> <span class="o">+</span>
+      <span class="s2">&quot;and &#39;wonderland&#39; - Skip Gram : &quot;</span><span class="p">,</span>
+      <span class="n">model2</span><span class="o">.</span><span class="n">wv</span><span class="o">.</span><span class="n">similarity</span><span class="p">(</span><span class="s1">&#39;alice&#39;</span><span class="p">,</span> <span class="s1">&#39;wonderland&#39;</span><span class="p">))</span>
+ 
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Cosine similarity between &#39;alice&#39; &quot;</span> <span class="o">+</span>
+      <span class="s2">&quot;and &#39;machines&#39; - Skip Gram : &quot;</span><span class="p">,</span>
+      <span class="n">model2</span><span class="o">.</span><span class="n">wv</span><span class="o">.</span><span class="n">similarity</span><span class="p">(</span><span class="s1">&#39;alice&#39;</span><span class="p">,</span> <span class="s1">&#39;machines&#39;</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Cosine similarity between &#39;alice&#39; and &#39;wonderland&#39; - CBOW :  0.9907446
+Cosine similarity between &#39;alice&#39; and &#39;machines&#39; - CBOW :  0.9346203
+Cosine similarity between &#39;alice&#39; and &#39;wonderland&#39; - Skip Gram :  0.8836416
+Cosine similarity between &#39;alice&#39; and &#39;machines&#39; - Skip Gram :  0.89018065
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./4_markus_stricker"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#text-preparation-tokenization-stopword-deletion">Text preparation: Tokenization &amp; stopword-deletion</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bag-of-words-from-scratch">Bag of Words from Scratch</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-preprocessing-of-text-data">Step 1: Preprocessing of text data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-vocabulary">Step 2: Vocabulary</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-calculate-word-frequency-and-vectorization">Step 3: Calculate word frequency and vectorization</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#alternative-scikit-learn-countvectorizer">Alternative: Scikit-learn <code class="docutils literal notranslate"><span class="pre">CountVectorizer</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tf-idf-extension-of-bag-of-words">TF-IDF: Extension of Bag of Words</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#word2vec-alice-in-wonderland">Word2Vec: Alice in Wonderland</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Jan Janssen
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
